@@ -1,0 +1,114 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Customer List</h1>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-12">
+            <mat-form-field>
+                <mat-label>Searching..</mat-label>
+                <input matInput type="text" (keyup)="search($event)" />
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="ml-3" style="float: right;" (click)="exporter.exportTable('csv', {fileName:'Customer List'})">Export Excel</button>
+            <app-add-customer style="float: right;" (saveFinish)="finish()"></app-add-customer>
+
+            <table mat-table matTableExporter #exporter="matTableExporter" [hiddenColumns]="[0,8,9]" [dataSource]="listData" matSort class="mat-elevation-z8">
+                <ng-container matColumnDef="image">
+                    <th mat-header-cell *matHeaderCellDef style="width: 10%;"></th>
+                    <td mat-cell *matCellDef="let row">
+                        <img [src]="row.image" style="border-radius: 50%;object-fit: cover; width: 60px; height: 60px;" class="p-1">
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="userId">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 5%;">Id</th>
+                    <td mat-cell *matCellDef="let row">{{row.userId}}</td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Full Name</th>
+                    <td mat-cell *matCellDef="let row"  (click)="ShowOrderHistory(content, row)">{{row.name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%;">Email</th>
+                    <td mat-cell *matCellDef="let row">{{row.email}}</td>
+                </ng-container>
+                <ng-container matColumnDef="address">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Address</th>
+                    <td mat-cell *matCellDef="let row">{{row.address}}</td>
+                </ng-container>
+                <ng-container matColumnDef="phone">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Phone</th>
+                    <td mat-cell *matCellDef="let row">{{row.phone}}</td>
+                </ng-container>
+                <ng-container matColumnDef="gender">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 7%;">Gender</th>
+                    <td mat-cell *matCellDef="let row">{{row.gender?'Male':'Female'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="registerDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Registration Date</th>
+                    <td mat-cell *matCellDef="let row">{{row.registerDate|date:'dd-MM-yyy'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Status</th>
+                    <td mat-cell *matCellDef="let row">{{row.status ? 'Active' : 'Inactive'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="view">
+                    <th mat-header-cell *matHeaderCellDef style="width: 5%; padding: 10px;">View</th>
+
+                    <td mat-cell *matCellDef="let row"  style="width: 5%; padding: 10px;" >
+                        <app-edit-customer [id]='row.userId' (editFinish)="finish()"></app-edit-customer>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef style="width: 10%;">Ban</th>
+                    <td mat-cell *matCellDef="let row">
+                        <a style="color: steelblue; cursor: pointer;" (click)="delete(row.userId, row.name)"><i class="fa fa-trash"></i></a>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+            </table>
+            <mat-paginator [length]="customerLength" showFirstLastButtons [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]">
+            </mat-paginator>
+
+        </div>
+    </div>
+</div>
+<!-- Modal container with ng-template -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" *ngIf="selectedCustomer">Order History for {{ selectedCustomer.name }}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="table-responsive">
+            <table class="table ps-table ps-table--invoices">
+                <thead>
+                    <tr>
+                        <th>OrderID</th>
+                        <th>Order Date</th>
+                        <th>Grand Total</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td>{{ order.ordersId }}</td>
+                        <td>{{ order.orderDate | date: 'dd-MM-yyyy' }}</td>
+                        <td>{{ order.amount | currency:'VND' }}</td>
+                        <td>{{ order.address }}</td>
+                        <td>{{ order.phone }}</td>
+                        <td style="width: 17%;">{{order.status==0?'Pending confirmation':order.status==4?'Payment completed':(order.status==1?'Confirmed':(order.status==2)?'Delivered':'Cancelled')}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

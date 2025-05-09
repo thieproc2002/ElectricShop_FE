@@ -1,0 +1,66 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h2 class="modal-title m-0">Add New Customer</h2>
+    </div>
+    <div class="modal-body p-4">
+        <form [formGroup]="postForm" class="row">
+            <input type="hidden" formControlName='userId'>
+            <input type="hidden" formControlName="status">
+            <div class="col-6">
+                <div class="form-group col-12">
+                    <label for="name">Customer's Name</label>
+                    <input type="text" id="name" [ngClass]="{'is-invalid':postForm.get('name')?.touched && postForm.get('name')?.invalid}" class="form-control" formControlName="name">
+                    <small class="invalid-feedback">Name Invalid!</small>
+                </div>
+                <div class="form-group col-12">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <input type="email" email id="price" [ngClass]="{'is-invalid':postForm.get('email')?.touched && postForm.get('email')?.invalid}" class="form-control" formControlName="email">
+                        <small class="invalid-feedback">Email Invalid!</small>
+                    </div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="password">Mật khẩu</label>
+                    <div class="input-group">
+                        <input type="password" id="password" [ngClass]="{'is-invalid':postForm.get('password')?.touched && postForm.get('password')?.invalid}" class="form-control" formControlName="password">
+                        <small class="invalid-feedback">Password Invalid!</small>
+                    </div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="address">Address</label>
+                    <div class="input-group">
+                        <input type="text" id="address" [ngClass]="{'is-invalid':postForm.get('address')?.touched && postForm.get('address')?.invalid}" class="form-control" formControlName="address">
+                        <small class="invalid-feedback">Address Invalid!</small>
+                    </div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="phone">Phone</label>
+                    <div class="input-group">
+                        <input type="text" id="phone" [ngClass]="{'is-invalid':postForm.get('phone')?.touched && postForm.get('phone')?.invalid}" class="form-control" formControlName="phone">
+                        <small class="invalid-feedback">Phone Invalid!</small>
+                    </div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="exampleFormControlSelect1">Gender</label>
+                    <select class="form-control" id="gender" name="gender" formControlName="gender">
+                        <option value="true">Male</option>
+                        <option value="false">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="col-12 text-center">
+                    <h3>Avatar</h3>
+                    <img [src]="image" style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|} mt-3 mb-3" alt="Ảnh sản phẩm">
+                    <div class="custom-file" style="width: 80%;">
+                        <input type="file" class="custom-file-input" id="customFile" (change)="onFileSelect($event)">
+                        <label class="custom-file-label" for="customFile">Select Picture</label>
+                    </div>
+                </div>
+            </div>
+
+            <button mat-raised-button color="primary" class="col-2 m-3" [disabled]="postForm?.invalid" (click)="save()">Add</button>
+        </form>
+    </div>
+</ng-template>
+<button mat-raised-button color="primary" (click)="open(content)">Add New Customer</button>

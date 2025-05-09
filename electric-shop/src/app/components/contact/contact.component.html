@@ -1,0 +1,117 @@
+<div class="ps-page--single" id="contact-us">
+    <div class="ps-breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a [routerLink]="['/home']">HomePage</a></li>
+                <li>Contact Us</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ps-contact-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14049.340485982573!2d-0.12031301106485542!3d51.50228117351734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce176ac979%3A0x42af85654e23a0b4!2sThe%20National%20Gallery!5e0!3m2!1sen!2s!4v1582441665587!5m2!1sen!2s" height="500"></iframe>
+    </div>
+        <div class="ps-contact-info">
+            <div class="container">
+                <div class="ps-section__header">
+                    <h3>Please contact us if you have any questions.</h3>
+                </div>
+                <div class="ps-section__content">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 ">
+                            <div class="ps-block--contact-info">
+                                <h4>Contact Us Directly</h4>
+                                <p><a href="#"><span class="__cf_email__" data-cfemail="e784888993868493a78a8695938192959ec984888a">[email&#160;protected]</span></a><span>(+84) xxx-xxx-xxx</span></p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 ">
+                            <div class="ps-block--contact-info">
+                                <h4>Head Quater</h4>
+                                <p><span>590 Cach Mang Thang Tam, District 3, Ho Chi Minh city</span></p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 ">
+                            <div class="ps-block--contact-info">
+                                <h4>Work with Us</h4>
+                                <p><span>Submit your CV/resume to our email address: </span><a href="#"><span class="__cf_email__" data-cfemail="f99a988b9c9c8bb994988b8d9f8c8b80d79a9694">[email&#160;protected]</span></a></p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 ">
+                            <div class="ps-block--contact-info">
+                                <h4>Customer Service</h4>
+                                <p><a href="#"><span class="__cf_email__" data-cfemail="5d3e282e293230382f3e3c2f381d303c2f293b282f24733e3230">[email&#160;protected]</span></a><span>(+84) xxx-xxx-xxx</span></p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 ">
+                            <div class="ps-block--contact-info">
+                                <h4>Media Relations</h4>
+                                <p><a href="#"><span class="__cf_email__" data-cfemail="9ff2fafbf6fedff2feedebf9eaede6b1fcf0f2">[email&#160;protected]</span></a><span>(+84) xxx-xxx-xxx</span></p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 ">
+                            <div class="ps-block--contact-info">
+                                <h4>Supplier Support</h4>
+                                <p><a href="#"><span class="__cf_email__" data-cfemail="7600131812190405030606190402361b1704021003040f5815191b">[email&#160;protected]</span></a><span>(+84) xxx-xxx-xxx</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="ps-contact-form">
+        <div class="container">
+            <form  [formGroup]="_regform" (ngSubmit)="proceedContact()" class="ps-form--contact-us">
+                <h3>Contact Us</h3>
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 ">
+                        <div class="form-group">
+                            <input formControlName="name" class="form-control" type="text" placeholder="Fullname*">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 ">
+                        <div class="form-group">
+                            <input formControlName="email" class="form-control" type="email" placeholder="Email*">
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter a valid email address.
+                          </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <div class="form-group">
+                            <input formControlName="subject"  class="form-control" type="text" placeholder="Title/Subject*">
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <div class="form-group">
+                            <textarea formControlName="message"  class="form-control" rows="5" placeholder="Message*"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group submit">
+                    <button  type="submit" class="ps-btn">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- <div class="ps-newsletter">
+    <div class="container">
+        <form class="ps-form--newsletter" action="#">
+            <div class="row">
+                <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <div class="ps-form__left">
+                        <h3>Bản tin</h3>
+                        <p>Đăng ký để nhận thông tin về sản phẩm và phiếu giảm giá</p>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <div class="ps-form__right">
+                        <div class="form-group--nest">
+                            <input class="form-control" type="email" placeholder="Địa chỉ Email">
+                            <button class="ps-btn">Gửi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> -->

@@ -1,0 +1,173 @@
+<div class="ps-page--my-account">
+    <div class="ps-breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a [routerLink]="['/home']">HomePage</a></li>
+                <li>Signin &amp; Signup</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ps-my-account">
+        <div class="container">
+            <form class="ps-form--account">
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a href="#sign-in" class="nav-link active" data-toggle="tab" style="color: black;">Signin</a>
+                    </li>
+                    <li>
+                        <a href="#sign-up" class="nav-link" data-toggle="tab" style="color: black;">Signup</a>
+                    </li>
+                </ul>
+                <div class="ps-tabs">
+                    <div class="ps-tab active" id="sign-in">
+                        <div class="ps-form__content">
+                            <h5>Signin Your Account</h5>
+                            <div class="login-container">
+                                <form class="form" [formGroup]="loginForm" (ngSubmit)="sign_in()">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input formControlName="email" id="email" class="form-control" type="text" placeholder="Enter your email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input formControlName="password" id="password" class="form-control" type="password" [type]="show ? 'text' : 'password'" placeholder="Enter your password">
+                                        <a><app-forgot-password></app-forgot-password></a>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="ps-checkbox">
+                                            <input class="form-control" type="checkbox" (click)="toggle()" id="show-password" name="show-password" />
+                                            <label for="show-password">Show Password</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group submit">
+                                        <button type="submit" class="ps-btn ps-btn--fullwidth">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                        </div>
+                        <div class="ps-form__footer">
+                            <p>Connect with:</p>
+                            <ul class="ps-list--social">
+                                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a class="google" href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- sign up -->
+                    <div class="ps-tab" id="sign-up">
+                        <div class="ps-form__content">
+                            <h5>Signup Your Account</h5>
+                            
+                            <form class="form" [formGroup]="registerForm" (ngSubmit)="sign_up()">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input [ngClass]="{'is-invalid': registerForm.get('email')?.touched && registerForm.get('email')?.invalid}"
+                                           formControlName="email"
+                                           id="email"
+                                           class="form-control"
+                                           type="text"
+                                           placeholder="Enter your email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="otp">Get OTP code</label>
+                                    <input [ngClass]="{'is-invalid': registerForm.get('otp')?.touched && registerForm.get('otp')?.invalid}"
+                                           formControlName="otp"
+                                           maxlength="6"
+                                           id="otp"
+                                           name="otp"
+                                           class="form-control"
+                                           type="text"
+                                           placeholder="OTP verification code">
+                                    <a class="btn btn-warning" style="font-size: 14px;"
+                                       (click)="registerForm.get('email')?.valid ? sendOtp() : sendError()">
+                                        <span>Get OTP by email</span>
+                                    </a>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Fullname</label>
+                                    <input [ngClass]="{'is-invalid': registerForm.get('name')?.touched && registerForm.get('name')?.invalid}"
+                                           formControlName="name"
+                                           id="name"
+                                           class="form-control"
+                                           type="text"
+                                           placeholder="Fullname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass">Password</label>
+                                    <input [ngClass]="{'is-invalid': registerForm.get('password')?.touched && registerForm.get('password')?.invalid}"
+                                           id="pass"
+                                           [type]="show ? 'text' : 'password'"
+                                           formControlName="password"
+                                           class="form-control"
+                                           type="password"
+                                           placeholder="Password">
+                                    <button class="btn btn-warning" style="font-size: 14px;" type="button" (click)="toggle()">
+                                        <span>Show Password</span>
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <input [ngClass]="{'is-invalid': registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid}"
+                                           id="confirmPassword"
+                                           [type]="show ? 'text' : 'password'"
+                                           formControlName="confirmPassword"
+                                           class="form-control"
+                                           type="password"
+                                           placeholder="Confirm Password">
+                                  </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input [ngClass]="{'is-invalid': registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid}"
+                                           formControlName="phone"
+                                           id="phone"
+                                           class="form-control"
+                                           type="text"
+                                           placeholder="Phone Number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input [ngClass]="{'is-invalid': registerForm.get('address')?.touched && registerForm.get('address')?.invalid}"
+                                           formControlName="address"
+                                           id="address"
+                                           class="form-control"
+                                           type="text"
+                                           placeholder="Address">
+                                </div>
+                                <div class="form-group submit">
+                                    <button type="submit" class="ps-btn ps-btn--fullwidth">Free Signup</button>
+                                </div>
+                            </form>
+                            
+                        </div>
+                       
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- <div class="ps-newsletter">
+    <div class="container">
+        <form class="ps-form--newsletter">
+            <div class="row">
+                <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <div class="ps-form__left">
+                        <h3>Bản tin</h3>
+                        <p>Đăng ký để nhận thông tin về sản phẩm và phiếu giảm giá</p>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <div class="ps-form__right">
+                        <div class="form-group--nest">
+                            <input class="form-control" type="email" placeholder="Địa chỉ Email">
+                            <button class="ps-btn">Gửi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> -->
