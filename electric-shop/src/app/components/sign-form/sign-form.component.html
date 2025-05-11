@@ -2,8 +2,8 @@
     <div class="ps-breadcrumb">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a [routerLink]="['/home']">HomePage</a></li>
-                <li>Signin &amp; Signup</li>
+                <li><a [routerLink]="['/home']">Trang chủ</a></li>
+                <li>Đăng nhập &amp; Đăng ký</li>
             </ul>
         </div>
     </div>
@@ -12,16 +12,16 @@
             <form class="ps-form--account">
                 <ul class="nav nav-tabs">
                     <li>
-                        <a href="#sign-in" class="nav-link active" data-toggle="tab" style="color: black;">Signin</a>
+                        <a href="#sign-in" class="nav-link active" data-toggle="tab" style="color: black;">Đăng nhập</a>
                     </li>
                     <li>
-                        <a href="#sign-up" class="nav-link" data-toggle="tab" style="color: black;">Signup</a>
+                        <a href="#sign-up" class="nav-link" data-toggle="tab" style="color: black;">Đăng ký</a>
                     </li>
                 </ul>
                 <div class="ps-tabs">
                     <div class="ps-tab active" id="sign-in">
                         <div class="ps-form__content">
-                            <h5>Signin Your Account</h5>
+                            <h5>Đăng nhập tài khoản của bạn</h5>
                             <div class="login-container">
                                 <form class="form" [formGroup]="loginForm" (ngSubmit)="sign_in()">
                                     <div class="form-group">
@@ -29,25 +29,25 @@
                                         <input formControlName="email" id="email" class="form-control" type="text" placeholder="Enter your email">
                                     </div>
                                     <div class="form-group">
-                                        <label for="password">Password</label>
+                                        <label for="password">Mật khẩu</label>
                                         <input formControlName="password" id="password" class="form-control" type="password" [type]="show ? 'text' : 'password'" placeholder="Enter your password">
                                         <a><app-forgot-password></app-forgot-password></a>
                                     </div>
                                     <div class="form-group">
                                         <div class="ps-checkbox">
                                             <input class="form-control" type="checkbox" (click)="toggle()" id="show-password" name="show-password" />
-                                            <label for="show-password">Show Password</label>
+                                            <label for="show-password">Hiện mật khẩu</label>
                                         </div>
                                     </div>
                                     <div class="form-group submit">
-                                        <button type="submit" class="ps-btn ps-btn--fullwidth">Login</button>
+                                        <button type="submit" class="ps-btn ps-btn--fullwidth">Đăng nhập</button>
                                     </div>
                                 </form>
                             </div>
                             
                         </div>
                         <div class="ps-form__footer">
-                            <p>Connect with:</p>
+                            <p>Liên hệ:</p>
                             <ul class="ps-list--social">
                                 <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a class="google" href="#"><i class="fa fa-google-plus"></i></a></li>
@@ -59,7 +59,7 @@
                     <!-- sign up -->
                     <div class="ps-tab" id="sign-up">
                         <div class="ps-form__content">
-                            <h5>Signup Your Account</h5>
+                            <h5>Đăng ký tài khoản</h5>
                             
                             <form class="form" [formGroup]="registerForm" (ngSubmit)="sign_up()">
                                 <div class="form-group">
@@ -69,10 +69,10 @@
                                            id="email"
                                            class="form-control"
                                            type="text"
-                                           placeholder="Enter your email">
+                                           placeholder="Nhập email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="otp">Get OTP code</label>
+                                    <label for="otp">Lấy mã OTP</label>
                                     <input [ngClass]="{'is-invalid': registerForm.get('otp')?.touched && registerForm.get('otp')?.invalid}"
                                            formControlName="otp"
                                            maxlength="6"
@@ -80,64 +80,64 @@
                                            name="otp"
                                            class="form-control"
                                            type="text"
-                                           placeholder="OTP verification code">
+                                           placeholder="Nhập mã OTP">
                                     <a class="btn btn-warning" style="font-size: 14px;"
                                        (click)="registerForm.get('email')?.valid ? sendOtp() : sendError()">
-                                        <span>Get OTP by email</span>
+                                        <span>Lấy mã OTP bằng email</span>
                                     </a>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Fullname</label>
+                                    <label for="name">Tên</label>
                                     <input [ngClass]="{'is-invalid': registerForm.get('name')?.touched && registerForm.get('name')?.invalid}"
                                            formControlName="name"
                                            id="name"
                                            class="form-control"
                                            type="text"
-                                           placeholder="Fullname">
+                                           placeholder="Tên">
                                 </div>
                                 <div class="form-group">
-                                    <label for="pass">Password</label>
+                                    <label for="pass">Mật khẩu</label>
                                     <input [ngClass]="{'is-invalid': registerForm.get('password')?.touched && registerForm.get('password')?.invalid}"
                                            id="pass"
                                            [type]="show ? 'text' : 'password'"
                                            formControlName="password"
                                            class="form-control"
                                            type="password"
-                                           placeholder="Password">
+                                           placeholder="Mật khẩu">
                                     <button class="btn btn-warning" style="font-size: 14px;" type="button" (click)="toggle()">
-                                        <span>Show Password</span>
+                                        <span>Hiện mật khẩu</span>
                                     </button>
                                 </div>
                                 <div class="form-group">
-                                    <label for="confirmPassword">Confirm Password</label>
+                                    <label for="confirmPassword">Xác nhận mật khẩu</label>
                                     <input [ngClass]="{'is-invalid': registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid}"
                                            id="confirmPassword"
                                            [type]="show ? 'text' : 'password'"
                                            formControlName="confirmPassword"
                                            class="form-control"
                                            type="password"
-                                           placeholder="Confirm Password">
+                                           placeholder="Xác nhận mật khẩu">
                                   </div>
                                 <div class="form-group">
-                                    <label for="phone">Phone Number</label>
+                                    <label for="phone">Số điện thoại</label>
                                     <input [ngClass]="{'is-invalid': registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid}"
                                            formControlName="phone"
                                            id="phone"
                                            class="form-control"
                                            type="text"
-                                           placeholder="Phone Number">
+                                           placeholder="Số điện thoại">
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Address</label>
+                                    <label for="address">Địa chỉ</label>
                                     <input [ngClass]="{'is-invalid': registerForm.get('address')?.touched && registerForm.get('address')?.invalid}"
                                            formControlName="address"
                                            id="address"
                                            class="form-control"
                                            type="text"
-                                           placeholder="Address">
+                                           placeholder="Địa chỉ">
                                 </div>
                                 <div class="form-group submit">
-                                    <button type="submit" class="ps-btn ps-btn--fullwidth">Free Signup</button>
+                                    <button type="submit" class="ps-btn ps-btn--fullwidth">Đăng ký</button>
                                 </div>
                             </form>
                             

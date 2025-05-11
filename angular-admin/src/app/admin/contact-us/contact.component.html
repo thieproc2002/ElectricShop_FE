@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">List contact</h1>
+    <h1 class="h3 mb-0 text-gray-800">Danh sách liên hệ</h1>
   </div>
 
   <!-- Content Row -->
@@ -17,12 +17,12 @@
       <table mat-table matTableExporter #exporter="matTableExporter" [hiddenColumns]="[2,3]" [dataSource]="listData" matSort class="mat-elevation-z8">
         <!-- Define table columns -->
         <ng-container matColumnDef="contactID">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Code Contact</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">CODE</th>
           <td mat-cell *matCellDef="let row">{{ row.contactID }}</td>
         </ng-container>
         
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Name</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Tên</th>
           <td mat-cell *matCellDef="let row">{{ row.name }}</td>
         </ng-container>
         
@@ -32,22 +32,22 @@
         </ng-container>
         
         <ng-container matColumnDef="subject">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Subject</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Chủ đề</th>
           <td mat-cell *matCellDef="let row">{{ row.subject }}</td>
         </ng-container>
         
         <ng-container matColumnDef="message">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 40%;">Message</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 40%;">Nhận xét</th>
           <td mat-cell *matCellDef="let row">{{ row.message }}</td>
         </ng-container>
         
         <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Status</th>
-          <td mat-cell *matCellDef="let row">{{ row.status === 1 ? 'unsent' : 'already sent' }}</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Trạng thái</th>
+          <td mat-cell *matCellDef="let row">{{ row.status === 1 ? 'chưa gửi' : 'đã gửi' }}</td>
         </ng-container>
         
         <ng-container matColumnDef="view">
-          <th mat-header-cell *matHeaderCellDef style="width: 5%;">View</th>
+          <th mat-header-cell *matHeaderCellDef style="width: 5%;">Xem</th>
           <td mat-cell *matCellDef="let row">
             <button mat-icon-button (click)="viewContact(row.contactID)">
               <mat-icon>visibility</mat-icon>
@@ -56,10 +56,10 @@
         </ng-container>
 
         <ng-container matColumnDef="rep">
-          <th mat-header-cell *matHeaderCellDef style="width: 5%;">Reply</th>
+          <th mat-header-cell *matHeaderCellDef style="width: 5%;">Trả lời</th>
           <td mat-cell *matCellDef="let row">
             <button mat-icon-button (click)="showReplyInput(row)">
-              <mat-icon>reply</mat-icon>
+              <mat-icon>trả lời</mat-icon>
             </button>
           </td>
         </ng-container>
@@ -76,16 +76,16 @@
     <div class="detail-overlay" *ngIf="selectedContact">
       <div class="detail-container">
         <div class="detail-item">
-          <h4>Contact Details</h4>
-          <p><strong>Name:</strong> {{ selectedContact.name }}</p>
+          <h4>Chi tiết liên hệ</h4>
+          <p><strong>Tên:</strong> {{ selectedContact.name }}</p>
           <p><strong>Email:</strong> {{ selectedContact.email }}</p>
-          <p><strong>Subject:</strong> {{ selectedContact.subject }}</p>
-          <p><strong>Message:</strong> {{ selectedContact.message }}</p>
+          <p><strong>Chủ đề:</strong> {{ selectedContact.subject }}</p>
+          <p><strong>Nhận xét:</strong> {{ selectedContact.message }}</p>
           
           <!-- Reply input -->
           <textarea class="form-control mb-3" rows="4" placeholder="Enter reply message" [(ngModel)]="replyMessage"></textarea>
-          <button class="btn btn-primary" (click)="sendEmailAndSetStatus()" [disabled]="!replyMessage.trim()">Send Email</button>
-          <button class="btn btn-secondary ml-2" (click)="closeDetail()">Close</button>
+          <button class="btn btn-primary" (click)="sendEmailAndSetStatus()" [disabled]="!replyMessage.trim()">Gửi Email</button>
+          <button class="btn btn-secondary ml-2" (click)="closeDetail()">Dóng</button>
         </div>
       </div>
     </div>

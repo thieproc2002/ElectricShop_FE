@@ -1,12 +1,12 @@
-<div>
+<!-- <div>
   <img src="img/slider/home-3/home-banner/3.jpg" alt="" height="60px" width="100%"/>
-</div>
+</div> -->
 <header class="header header--1" data-sticky="true">
     <div class="header__top">
         <div class="ps-container">
             <div class="header__left">
                 <div class="menu--product-categories">
-                    <div class="menu__toggle"><i class="icon-menu"></i><span>Browse by Category</span></div>
+                    <div class="menu__toggle"><i class="icon-menu"></i><span>Danh mục</span></div>
                     <div class="menu__content">
                         <ul class="menu--dropdown">
                             <li *ngFor="let item of categories">
@@ -23,10 +23,10 @@
       class="form-control" 
       (keyup)="search($event)" 
       type="text" 
-      placeholder="Searching product name..." 
+      placeholder="Tìm kiếm sản phẩm..." 
       id="input-search" 
     />
-    <button type="submit">Find</button>
+    <button type="submit">Tìm</button>
   </form>
             </div>
             <div class="header__right">
@@ -55,13 +55,13 @@
                                 <ul class="menu--dropdown" style="
                                 margin-left: -180px;" >
                                     <li *ngIf="isLogin">
-                                        <a [routerLink]="['/profile']">Profile</a>
+                                        <a [routerLink]="['/profile']">Trang cá nhân</a>
                                     </li>
                                     <li *ngIf="!isLogin">
-                                        <a [routerLink]="['/sign-form']">Signin &amp; Signup</a>
+                                        <a [routerLink]="['/sign-form']">Đăng Nhập &amp; Đăng Ký</a>
                                     </li>
                                     <li *ngIf="isLogin">
-                                        <a href="javascript:void(0);" (click)="logout()">Logout</a>
+                                        <a href="javascript:void(0);" (click)="logout()">Đăng Xuất</a>
                                     </li>
                                 </ul>
                             </div>
@@ -75,7 +75,7 @@
         <div class="ps-container">
             <div class="navigation__left">
                 <div class="menu--product-categories">
-                    <div class="menu__toggle"><i class="icon-menu"></i><span>Browse by Category</span></div>
+                    <div class="menu__toggle"><i class="icon-menu"></i><span>Danh Mục</span></div>
                     <div class="menu__content">
                         <ul class="menu--dropdown">
                             <li *ngFor="let item of categories">
@@ -87,11 +87,11 @@
             </div>
             <div class="navigation__right">
                 <ul class="menu">
-                    <li class="menu-item"><a [routerLink]="['/home']">HomePage</a></li>
-                    <li class="menu-item"><a [routerLink]="['/all-product']">Store</a></li>
-                    <li class="menu-item"><a [routerLink]="['/about']">About Us</a></li>
-                    <li class="menu-item"><a [routerLink]="['/contact']">Contact Us</a></li>
-                    <li class="menu-item" *ngIf="!isLogin"><a [routerLink]="['/sign-form']">Signin &amp; Signup</a></li>
+                    <li class="menu-item"><a [routerLink]="['/home']">Trang chủ</a></li>
+                    <li class="menu-item"><a [routerLink]="['/all-product']">Cửa Hàng</a></li>
+                    <li class="menu-item"><a [routerLink]="['/about']">Thông tin về chúng tôi</a></li>
+                    <li class="menu-item"><a [routerLink]="['/contact']">Liên hệ</a></li>
+                    <li class="menu-item" *ngIf="!isLogin"><a [routerLink]="['/sign-form']">Đăng nhập &amp; Đăng ký</a></li>
                 </ul>
             </div>
         </div>
