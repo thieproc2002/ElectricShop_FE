@@ -2,9 +2,9 @@
     <div class="ps-breadcrumb">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a [routerLink]="['/home']">HomePage</a></li>
-                <li><a [routerLink]="['/profile']">Profile</a></li>
-                <li>Personal Account</li>
+                <li><a [routerLink]="['/home']">Trang chủ</a></li>
+                <li><a [routerLink]="['/profile']">Thông tin cá nhân</a></li>
+                <li>Tài khoản người dùng</li>
             </ul>
         </div>
     </div>
@@ -17,9 +17,9 @@
                             <div class="ps-widget__header">
                                 <img [src]="customer.image" alt="" />
                                 <figure>
-                                    <p>Fullname: <span style="color: #09c;">{{customer.name}}</span></p>
+                                    <p>Tên: <span style="color: #09c;">{{customer.name}}</span></p>
                                     
-                                    <p>JoinDate: <span>{{customer.registerDate | date:'dd-MM-yyy'}}</span></p>
+                                    <p>Ngày tham gia: <span>{{customer.registerDate | date:'dd-MM-yyy'}}</span></p>
                                 </figure>
                             </div>
                             <div class="ps-widget__content">
@@ -29,9 +29,9 @@
                                         <a href="javascript:void(0);"><i class="icon-papers"></i> {{customer.phone}}</a>
                                         <a href="javascript:void(0);"><i class="icon-user"></i> {{customer.gender?'Nam':'Nữ'}}</a>
                                         <a href="javascript:void(0);"><i class="icon-map-marker"></i> {{customer.address}}</a>
-                                        <a href="javascript:void(0);"><i class="icon-store"></i>The transaction: {{done}} orders</a>
-                                        <button (click)="CompareProduct(content)" style="background-color: #ffd26d; width: 100%;" _ngcontent-jca-c125="" class="ps-btn">Edit</button>
-                                        <button (click)="ShowChangePass(content2)" style="background-color: #8b5ca3;width: 100%;" _ngcontent-jca-c125="" class="ps-btn">Change Password</button>
+                                        <a href="javascript:void(0);"><i class="icon-store"></i>Giao dịch: {{done}} đơn hàng</a>
+                                        <button (click)="CompareProduct(content)" style="background-color: #ffd26d; width: 100%;" _ngcontent-jca-c125="" class="ps-btn">Chỉnh sửa thông tin</button>
+                                        <button (click)="ShowChangePass(content2)" style="background-color: #8b5ca3;width: 100%;" _ngcontent-jca-c125="" class="ps-btn">Đổi mật khẩu</button>
                                     </li>
                                 </ul>
                             </div>
@@ -42,7 +42,7 @@
                     <div class="ps-section__right">
                         <div class="ps-section--account-setting">
                             <div class="ps-section__header">
-                                <h3>Order History</h3>
+                                <h3>Lịch sử mua hàng</h3>
                             </div>
                             <div class="ps-section__content">
                                 <div class="table-responsive">
@@ -50,12 +50,12 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Order Date</th>
-                                                <th>Grand Total</th>
-                                                <th>Address</th>
-                                                <th>Phone</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th>Ngày mua</th>
+                                                <th>Thành tiền</th>
+                                                <th>Địa chỉ</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Trạng thái</th>
+                                                <th>Hoạt động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -65,7 +65,7 @@
                                                 <td>{{item.amount|currency:'VND'}}</td>
                                                 <td>{{item.address}}</td>
                                                 <td>{{item.phone}}</td>
-                                                <td style="width: 17%;">{{item.status==0?'Pending confirmation':item.status==4?'Payment completed':(item.status==1?'Confirmed':(item.status==2)?'Delivered':'Cancelled')}}</td>
+                                                <td style="width: 17%;">{{item.status==0?'Chờ xác nhận':item.status==4?'Thanh toán thành công':(item.status==1?'Đã xác nhận':(item.status==2)?'Đã giao hàng':'Đã hủy')}}</td>
                                                 <td style="width: 5%;">
                                                     <app-order-detail [id]="item.ordersId"></app-order-detail>
                                                     <a [title]="item.status==0?'Cancelled order':'Cannot cancel this order'"
@@ -124,7 +124,7 @@
     
     <ng-template #content let-modal>
         <div class="modal-header">
-            <h4 class="modal-title">Edit Profile</h4>
+            <h4 class="modal-title">Chỉnh sửa thông tin cá nhân</h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body">
@@ -134,61 +134,61 @@
                         <form (ngSubmit)="updateUser()" class="needs-validation" novalidate>
                             <div class="mb-3">
                                 <div class="col-12 text-center">
-                                    <h3>Avatar</h3>
+                                    <h3>Ảnh đại diện</h3>
                                     <img  [src]="customerUpdate.image" [(ngModel)]="customerUpdate.image" name="image"style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|} mt-3 mb-3" alt="Ảnh sản phẩm">
                                     <div class="custom-file" style="width: 80%;">
                                         <input type="file" class="custom-file-input" id="customFile" (change)="onFileSelect($event)">
-                                        <label class="custom-file-label" for="customFile">Select Picture</label>
+                                        <label class="custom-file-label" for="customFile">Chọn ảnh</label>
                                     </div>
                                 </div>
                             </div>
                 
                             <div class="mb-3" style="width: 100%;">
-                                <label for="name" class="form-label">Name:</label>
+                                <label for="name" class="form-label">Tên:</label>
                                 <input id="name" [(ngModel)]="customerUpdate.name" name="name" class="form-control" required>
                                 <div class="invalid-feedback">
-                                    Please provide a name.
+                                    Vui lòng điền tên.
                                 </div>
                             </div>
                             <div class="mb-3" style="width: 100%;">
-                                <label for="address" class="form-label">Address:</label>
+                                <label for="address" class="form-label">Địa chỉ:</label>
                                 <input id="address" [(ngModel)]="customerUpdate.address" name="address" class="form-control" required type="text">
                                 <div class="invalid-feedback">
-                                    Please provide an address.
+                                    Vui lòng điền địa chỉ.
                                 </div>
                             </div>
                             <div class="mb-3" style="width: 100%;">
-                                <label for="phone" class="form-label">Phone:</label>
+                                <label for="phone" class="form-label">Số điện thoại:</label>
                                 <input id="phone" [(ngModel)]="customerUpdate.phone" name="phone" class="form-control" required type="text">
                                 <div class="invalid-feedback">
-                                    Please provide a phone number.
+                                    Vui lòng điền số điện thoại.
                                 </div>
                             </div>
                             <div class="mb-3" style="width: 100%;">
-                                <label for="gender" class="form-label">Gender:</label>
+                                <label for="gender" class="form-label">Giới tính:</label>
                                 <select id="gender" [(ngModel)]="customerUpdate.gender" name="gender" class="form-select" required>
-                                    <option [ngValue]="true">Male</option>
-                                    <option [ngValue]="false">Female</option>
+                                    <option [ngValue]="true">Nam</option>
+                                    <option [ngValue]="false">Nữ</option>
                                 </select>
                                 <div class="invalid-feedback">
-                                    Please select a gender.
+                                    Vui lòng chọn giới tính.
                                 </div>
                             </div>
                          
-                            <button type="submit" class="btn btn-primary">Update User</button>
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Đóng</button>
         </div>
     </ng-template>
 
     <ng-template #content2 let-modal>
         <div class="modal-header">
-            <h4 class="modal-title">Change Password</h4>
+            <h4 class="modal-title">Đổi mật khẩu</h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body">
@@ -197,34 +197,34 @@
                     <div class="container mt-5">
                         <form [formGroup]="_regform" (ngSubmit)="proceedChangePass()">
                             <div class="mb-3" style="width: 30%;">
-                                <label for="oldPassword" class="form-label">Old password:</label>
+                                <label for="oldPassword" class="form-label">Mật khẩu cũ:</label>
                                 <input type="password" class="form-control" formControlName="oldPassword" matInput/>
                                 <div class="invalid-feedback">
-                                    Please provide your old password.
+                                    Vui lòng nhập mật khẩu cũ.
                                 </div>
                             </div>
                             <div class="mb-3" style="width: 30%;">
-                                <label for="password" class="form-label">New password:</label>
+                                <label for="password" class="form-label">Mật khẩu mới:</label>
                                 <input type="password" class="form-control" formControlName="password" matInput/>
                                 <div class="invalid-feedback">
-                                    Please provide a new password.
+                                    Vui lòng điền mật khẩu mới.
                                 </div>
                             </div>
                             <div class="mb-3" style="width: 30%;">
-                                <label for="password" class="form-label">Confirm password:</label>
+                                <label for="password" class="form-label">Xác nhận mật khẩu mới:</label>
                                 <input type="password" class="form-control" formControlName="confirmpassword" matInput/>
                                 <div class="invalid-feedback">
-                                    Please confirm your new password.
+                                    Xác nhận mật khẩu mới.
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Update User</button>
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Đóng</button>
         </div>
     </ng-template>
     

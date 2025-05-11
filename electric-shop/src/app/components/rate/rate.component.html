@@ -1,6 +1,6 @@
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title p-0">Rating Product</h4>
+        <h4 class="modal-title p-0">Đánh giá sản phẩm</h4>
     </div>
     <div class="modal-body">
         <form [formGroup]="postForm">
@@ -12,14 +12,14 @@
                 <span style="font-weight: bold;" class="ml-2">{{orderDetail.product.name}}</span>
             </div>
             <div class="col-10 offset-1 mt-3">
-                <label for="comment">Review:</label>
+                <label for="comment">Nhận xét:</label>
                 <textarea class="form-control texta" formControlName="comment" name="comment" id="comment" row="3"></textarea>
             </div>
             <div class="col-10 offset-1 d-flex mt-3">
-                <span>Rating:</span>
+                <span>Đánh giá:</span>
                 <ngb-rating class="ml-2" [(rate)]="star" [(ngModel)]="star" [starTemplate]="t" [readonly]="false" [max]="5"></ngb-rating>
             </div>
-            <button class="mt-3 btn btn-info" style="margin-left: 8%;font-size: 14px;" (click)="rating()">Submit Review</button>
+            <button class="mt-3 btn btn-info" style="margin-left: 8%;font-size: 14px;" (click)="rating()">Gửi đánh giá</button>
         </form>
     </div>
 </ng-template>
