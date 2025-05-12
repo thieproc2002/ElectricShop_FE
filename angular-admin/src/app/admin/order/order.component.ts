@@ -23,7 +23,7 @@ export class OrderComponent implements OnInit {
 searchOrderId: string = '';
 searchName: string = '';
 searchPhone: string = '';
-searchOrderDate: string = '';
+
   webSocket!: WebSocket;
   chatMessages: ChatMessage[] = [];
 
@@ -69,10 +69,10 @@ searchOrderDate: string = '';
             const matchesName = this.searchName === '' || order.user.name.toLowerCase().includes(this.searchName.toLowerCase());
             const matchesPhone = this.searchPhone === '' || order.phone.includes(this.searchPhone);
             
-            const orderDateString = new Date(order.orderDate).toISOString().slice(0, 10); // Chuyển về yyyy-MM-dd
-            const matchesOrderDate = this.searchOrderDate === '' || orderDateString === this.searchOrderDate;
+            // const orderDateString = new Date(order.orderDate).toISOString().slice(0, 10); // Chuyển về yyyy-MM-dd
+            // const matchesOrderDate = this.searchOrderDate === '' || orderDateString === this.searchOrderDate;
 
-            return matchesOrderId && matchesName && matchesPhone && matchesOrderDate;
+            return matchesOrderId && matchesName && matchesPhone;
         });
 
         // Cập nhật bảng
