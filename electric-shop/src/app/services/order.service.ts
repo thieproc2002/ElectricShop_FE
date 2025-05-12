@@ -33,6 +33,9 @@ export class OrderService {
   cancel(id: number) {
     return this.httpClient.get(this.url+'/cancel/'+id);
   }
+  paid(id: number) {
+    return this.httpClient.get(this.url+'/paid/'+id);
+  }
   postpaypal(email: string, cart: Cart) {
     return this.httpClient.post(this.url+'/paypal/'+email, cart);
   }

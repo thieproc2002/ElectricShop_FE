@@ -64,7 +64,7 @@
         </div>
     </div>
     <br><br><br>
-    <div class="row" *ngIf="!isLoading">
+    <div class="row" *ngIf="!isLoading && (productRecommend?.length || 0) > 0">
         <div class="ps-container">
             <div class="ps-section__header" style="background-color: #e3e3e3; padding-top: 8px;">
                 <h3 style="padding: 8px;">Recommend for you</h3>
@@ -72,13 +72,13 @@
             <br>
             <div class="ps-section__content">
                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                    <div ngxSlickItem *ngFor="let item of productRecommend  | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide">
+                    <div ngxSlickItem *ngFor="let item of productRecommend  | paginate: { itemsPerPage: 10, currentPage: 0}" class="slide">
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
                                 <a href="javascript:void(0);">
                                     <img [src]="item.image" [routerLink]="['/product-detail/'+item.productId]" alt="" />
                                 </a>
-                                <div class="ps-product__badge">-{{item.discount}}%</div>
+                                <div class="ps-product__badge" *ngIf="item.discount > 0">-{{item.discount}}%</div>
                                 <ul class="ps-product__actions">
                                     <li>
                                         <a href="javascript:void(0);" 
@@ -131,6 +131,18 @@
             </div>
         </div>
     </div>
+    <br>  <br>
+    <div class="ps-home-ads">
+      <div class="ps-container">
+          <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 " ><a class="ps-collection" href="javascript:void(0);"><img src="img/collection/home-1/ad-7.jpg" alt=""></a>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 "><a class="ps-collection" href="javascript:void(0);"><img src="img/collection/home-1/ad-6.png" alt=""></a>
+              </div>
+          </div>
+      </div>
+  </div>
+  <br>
     <div class="row" style="min-height: 700px !important;" *ngIf="isLoading">
         <div class="spinner-border text-warning" role="status" style="margin: auto; width: 6em;height: 6em;"></div>
     </div>
@@ -142,7 +154,7 @@
             <br>
             <div class="ps-section__content">
                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                    <div ngxSlickItem *ngFor="let item of productRated  | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide">
+                    <div ngxSlickItem *ngFor="let item of productRated  | paginate: { itemsPerPage: 10, currentPage: 0}" class="slide">
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
                                 <a href="javascript:void(0);">
@@ -222,7 +234,7 @@
             <br>
             <div class="ps-section__content">
                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                    <div ngxSlickItem *ngFor="let item of productSeller | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide" >
+                    <div ngxSlickItem *ngFor="let item of productSeller | paginate: { itemsPerPage: 10, currentPage: 0}" class="slide" >
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
                                 <a href="javascript:void(0);">
@@ -302,7 +314,7 @@
             <br>
             <div class="ps-section__content">
                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                    <div ngxSlickItem *ngFor="let item of productLatest | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide" >
+                    <div ngxSlickItem *ngFor="let item of productLatest | paginate: { itemsPerPage: 10, currentPage: 0}" class="slide" >
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
                                 <a href="javascript:void(0);">

@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 
 import { AdminModule } from './admin/admin.module';
 import { LoginComponent } from './login/login.component';
@@ -25,7 +26,8 @@ const routes: Routes = [
     AdminModule,
     LoginModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
