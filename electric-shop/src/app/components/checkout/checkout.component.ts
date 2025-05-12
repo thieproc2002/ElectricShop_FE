@@ -35,7 +35,7 @@ export class CheckoutComponent implements OnInit {
   amountReal!: number;
 
   postForm: FormGroup;
-
+  orderId!: number;
   provinces!: Province[];
   districts!: District[];
   wards!: Ward[];
@@ -171,17 +171,7 @@ export class CheckoutComponent implements OnInit {
 }
 checkOutpay() {
   if (this.postForm.valid) {
-    if (1==1) { // Kiểm tra xem các thuộc tính đã được gán giá trị chưa
-      Swal.fire({
-        title: 'Do you want to place this order?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'No',
-        confirmButtonText: 'Yes'
-      }).then((result) => {
-        if (result.isConfirmed) { // Kiểm tra nếu người dùng đã bấm nút "Yes"
+    // Kiểm tra nếu người dùng đã bấm nút "Yes"
           let email = this.sessionService.getUser();
           this.cartService.getCart(email).subscribe(data => {
             this.cart = data as Cart;
@@ -192,6 +182,7 @@ checkOutpay() {
               this.cart = data as Cart;
               this.orderService.postpaypal(email, this.cart).subscribe(data => {
                 let order: Order = data as Order;
+                this.orderId = order.ordersId;
                 this.sendMessage(order.ordersId);
                 Swal.fire(
                   'Success!',
@@ -208,23 +199,10 @@ checkOutpay() {
           }, error => {
             this.toastr.error('Error!', 'System!');
           });
-        } else {
-          // Hành động khi người dùng bấm "Cancel"
-          Swal.fire(
-            'Cancelled',
-            'Your order was not placed.',
-            'error'
-          );
-        }
-      });
-    } else {
-      console.error('One or more of ward, district, or province is undefined.');
-    }
   } else {
     this.toastr.error('Please enter all required information', 'System!');
   }
 }
-
 
   sendMessage(id:number) {
     let chatMessage = new ChatMessage(this.cart.user.name, ' has placed an order.');
@@ -321,8 +299,24 @@ getDistristByCode(code:any) {
   // Nếu không tìm thấy đối tượng nào có mã trùng khớp, trả về null hoặc một giá trị khác tùy thuộc vào yêu cầu của bạn
   return null;
 }
+  // paidOrder(id: number) {
+  //     if(id===-1) {
+  //       return;
+  //     }
+  //     this.orderService.paid(id).subscribe(data => {
+  //       // this.orderId = data as number;
+  //       this.toastr.success('Success!', 'System!');
+  //       Swal.fire(
+  //           'Thanh toán thành công',
+  //           'Đơn hàng của bạn đã được thanh toán thành công.',
+  //           'success'
+  //         );
+  //       this.router.navigate(['/cart']);
+  //     }, error => {
+  //       this.toastr.error('Your cart has a product that is out of stock!', 'System!');
+  //     });
   
-
+  //   }
   setProvinceCode(code: any) {
     this.provinceCode = code.value;
     this.getDistricts();
@@ -374,18 +368,18 @@ getDistristByCode(code:any) {
         },
         onClientAuthorization: (data) => {
             console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-            this.checkOutpay();
+            this.checkOutpay();  
         },
         onCancel: (data, actions) => {
             console.log('OnCancel', data, actions);
 
         },
         onError: err => {
-            console.log('OnError', err);
+            console.log('OnError', err);  
         },
         onClick: (data, actions) => {
-            console.log('onClick', data, actions);
-
+          console.log('onClick', data, actions);
+            
         },
     };
 }

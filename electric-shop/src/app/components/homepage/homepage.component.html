@@ -17,35 +17,35 @@
                     <div class="ps-block__left"><i class="icon-rocket"></i></div>
                     <div class="ps-block__right">
                         <h4>Freeship</h4>
-                        <p>Freeship for all</p>
+                        <p>Freeship tất cả mặt hàng</p>
                     </div>
                 </div>
                 <div class="ps-block__item">
                     <div class="ps-block__left"><i class="icon-sync"></i></div>
                     <div class="ps-block__right">
-                        <h4>90-day return policy</h4>
-                        <p>If there are any issues with the product</p>
+                        <h4>90 trả hàng</h4>
+                        <p>Nếu sản phẩm có vấn đề</p>
                     </div>
                 </div>
                 <div class="ps-block__item">
                     <div class="ps-block__left"><i class="icon-credit-card"></i></div>
                     <div class="ps-block__right">
-                        <h4>Secure Payment</h4>
-                        <p>Good Price</p>
+                        <h4>Thanh toán dễ dàng</h4>
+                        <p>Giá tốt</p>
                     </div>
                 </div>
                 <div class="ps-block__item">
                     <div class="ps-block__left"><i class="icon-bubbles"></i></div>
                     <div class="ps-block__right">
-                        <h4>Support 24/7</h4>
-                        <p>Dedicated Support</p>
+                        <h4>Hỗ trợ 24/7</h4>
+                        <p>Hỗ trợ nhiệt tình</p>
                     </div>
                 </div>
                 <div class="ps-block__item">
                     <div class="ps-block__left"><i class="icon-gift"></i></div>
                     <div class="ps-block__right">
-                        <h4>Gift Services</h4>
-                        <p>Gift Assistance</p>
+                        <h4>Ưu đãi</h4>
+                        <p>Ưu đãi khủng</p>
                     </div>
                 </div>
             </div>
@@ -64,21 +64,21 @@
         </div>
     </div>
     <br><br><br>
-    <div class="row" *ngIf="!isLoading">
+    <div class="row" *ngIf="!isLoading && (productRecommend?.length || 0) > 0">
         <div class="ps-container">
             <div class="ps-section__header" style="background-color: #e3e3e3; padding-top: 8px;">
-                <h3 style="padding: 8px;">Recommend for you</h3>
+                <h3 style="padding: 8px;">Đề xuất cho bạn</h3>
             </div>
             <br>
             <div class="ps-section__content">
                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                    <div ngxSlickItem *ngFor="let item of productRecommend  | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide">
+                    <div ngxSlickItem *ngFor="let item of productRecommend  | paginate: { itemsPerPage: 10, currentPage: 0}" class="slide">
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
                                 <a href="javascript:void(0);">
                                     <img [src]="item.image" [routerLink]="['/product-detail/'+item.productId]" alt="" />
                                 </a>
-                                <div class="ps-product__badge">-{{item.discount}}%</div>
+                                <div class="ps-product__badge" *ngIf="item.discount > 0">-{{item.discount}}%</div>
                                 <ul class="ps-product__actions">
                                     <li>
                                         <a href="javascript:void(0);" 
@@ -131,18 +131,30 @@
             </div>
         </div>
     </div>
+    <br>  <br>
+    <div class="ps-home-ads">
+      <div class="ps-container">
+          <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 " ><a class="ps-collection" href="javascript:void(0);"><img src="img/collection/home-1/ad-7.jpg" alt=""></a>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 "><a class="ps-collection" href="javascript:void(0);"><img src="img/collection/home-1/ad-6.png" alt=""></a>
+              </div>
+          </div>
+      </div>
+  </div>
+  <br>
     <div class="row" style="min-height: 700px !important;" *ngIf="isLoading">
         <div class="spinner-border text-warning" role="status" style="margin: auto; width: 6em;height: 6em;"></div>
     </div>
     <div class="row" *ngIf="!isLoading">
         <div class="ps-container">
             <div class="ps-section__header" style="background-color: #e3e3e3; padding-top: 8px;">
-                <h3 style="padding: 8px;">Popular Products</h3>
+                <h3 style="padding: 8px;">Sản phẩm phổ biến</h3>
             </div>
             <br>
             <div class="ps-section__content">
                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                    <div ngxSlickItem *ngFor="let item of productRated  | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide">
+                    <div ngxSlickItem *ngFor="let item of productRated  | paginate: { itemsPerPage: 10, currentPage: 0}" class="slide">
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
                                 <a href="javascript:void(0);">
@@ -217,12 +229,12 @@
     <div class="row" *ngIf="!isLoading">
         <div class="ps-container">
             <div class="ps-section__header" style="background-color: #e3e3e3; padding-top: 8px;">
-                <h3 style="padding: 8px;">Best Selling Products</h3>
+                <h3 style="padding: 8px;">Sản phẩm bán chạy</h3>
             </div>
             <br>
             <div class="ps-section__content">
                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                    <div ngxSlickItem *ngFor="let item of productSeller | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide" >
+                    <div ngxSlickItem *ngFor="let item of productSeller | paginate: { itemsPerPage: 10, currentPage: 0}" class="slide" >
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
                                 <a href="javascript:void(0);">
@@ -254,7 +266,7 @@
                                         <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
                                                 title="{{getAvgRate(item.productId)}} sao">
                                         </ngb-rating>
-                                        ({{countRate}} Rating)
+                                        ({{countRate}} đánh giá)
                                     </div>
                                     <p class="ps-product__price sale">
                                         <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
@@ -267,7 +279,7 @@
                                         <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
                                                 title="{{getAvgRate(item.productId)}} sao">
                                         </ngb-rating>
-                                        ({{countRate}} Rating)
+                                        ({{countRate}} đánh giá)
                                     </div>
                                     <p class="ps-product__price sale">
                                         <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
@@ -297,12 +309,12 @@
     <div class="row" *ngIf="!isLoading">
         <div class="ps-container">
             <div class="ps-section__header" style="background-color: #e3e3e3; padding-top: 8px;">
-                <h3 style="padding: 8px;">Featured New Products</h3>
+                <h3 style="padding: 8px;">Sản phẩm nổi bật</h3>
             </div>
             <br>
             <div class="ps-section__content">
                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                    <div ngxSlickItem *ngFor="let item of productLatest | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide" >
+                    <div ngxSlickItem *ngFor="let item of productLatest | paginate: { itemsPerPage: 10, currentPage: 0}" class="slide" >
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
                                 <a href="javascript:void(0);">
@@ -334,7 +346,7 @@
                                         <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
                                                 title="{{getAvgRate(item.productId)}} sao">
                                         </ngb-rating>
-                                        ({{countRate}} Rating)
+                                        ({{countRate}} đánh giá)
                                     </div>
                                     <p class="ps-product__price sale">
                                         <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>

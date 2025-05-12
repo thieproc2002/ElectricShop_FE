@@ -1,9 +1,9 @@
 <div class="ps-breadcrumb">
     <div class="ps-container">
         <ul class="breadcrumb">
-            <li><a [routerLink]="['/home']">HomePage</a></li>
-            <li><a [routerLink]="['/all-product']">Store</a></li>
-            <li>Product Details</li>
+            <li><a [routerLink]="['/home']">Trang chủ</a></li>
+            <li><a [routerLink]="['/all-product']">Cửa hàng</a></li>
+            <li>Chi tiết sản phẩm</li>
         </ul>
     </div>
 </div>
@@ -36,7 +36,7 @@
                                 <ngb-rating [rate]="getAvgRate(product.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
                                         title="{{getAvgRate(product.productId)}} sao">
                                 </ngb-rating>
-                                ({{countRate}} Rating)
+                                ({{countRate}} Đánh giá)
                             </div>
                             <p class="ps-product__price sale">
                                 <del *ngIf="product.discount != 0">{{product.price|currency:'VND'}}</del>
@@ -44,7 +44,7 @@
                             </p>
                             <div class="ps-product__desc">
                                 <p>Thể loại:<a href="javascript:void(0);"><strong> {{product.category.categoryName}}</strong></a></p>
-                                <p style="text-decoration: underline;font-size: 16px;">Description <strong> (Sold {{product.sold}} products):</strong></p>
+                                <p style="text-decoration: underline;font-size: 16px;"><strong> (Đã bán {{product.sold}} sản phẩm):</strong></p>
                                 <p>{{product.description}}</p>
                             </div>
                             <div class="ps-product__shopping">
@@ -52,17 +52,17 @@
                               href="javascript:void(0);" 
                               (click)="addCart(product.productId, product.price * (1 - product.discount / 100))"
                               [ngClass]="{'disabled': product.quantity === 0}">
-                              {{ product.quantity === 0 ? 'Out of Stock' : 'Add To Cart' }}
+                              {{ product.quantity === 0 ? 'Hết hàng' : 'Thêm vào giỏ hàng' }}
                            </a>
                            
-                                 <a class="ps-btn ps-btn--Green"  (click)="CompareProduct(content)">Compare Product</a>
+                                 <a class="ps-btn ps-btn--Green"  (click)="CompareProduct(content)">So sánh</a>
                                 <div class="ps-product__actions">
-                                    <a href="javascript:void(0);" (click)="toggleLike(product.productId)"><i style="color: #ffcc23;" class="icon-heart"></i></a> {{totalLike}} Likes
+                                    <a href="javascript:void(0);" (click)="toggleLike(product.productId)"><i style="color: #ffcc23;" class="icon-heart"></i></a> {{totalLike}} lượt thích
                                 </div>
                             </div>
                             <div class="ps-product__specification">
-                                <p class="categories"><strong> Categories:</strong><a href="#">Consumer Electronics</a>,<a href="#"> Refrigerator</a>,<a href="#">Babies & Moms</a></p>
-                                <p class="tags"><strong> Tags</strong><a href="#">sofa</a>,<a href="#">technologies</a>,<a href="#">wireless</a></p>
+                                <p class="categories"><strong> Danh mục:</strong><a href="#">Điện tử</a>,<a href="#"> Tủ lạnh</a>,<a href="#">Trẻ sơ sinh và Mẹ</a></p>
+                                <p class="tags"><strong> Tags</strong><a href="#">sofa</a>,<a href="#">công nghệ</a>,<a href="#">không dây</a></p>
                             </div>
                             <div class="ps-product__sharing"><a class="facebook" href="#"><i class="fa fa-facebook"></i></a><a class="twitter" href="#"><i class="fa fa-twitter"></i></a><a class="google" href="#"><i class="fa fa-google-plus"></i></a><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></div>
                         </div>
@@ -70,7 +70,7 @@
 
                     <div >
                       <ul class="ps-tab-list">
-                          <li class="active"><a href="javascript:void(0);">Description</a></li>
+                          <li class="active"><a href="javascript:void(0);">Mô tả</a></li>
                       </ul>
                       <div class="ps-tab active" id="tab-1">
                             <p>{{product.description}}</p>
@@ -78,11 +78,11 @@
                   </div>
                     <div >
                         <ul class="ps-tab-list">
-                            <li class="active"><a href="javascript:void(0);">Customer Reviews</a></li>
+                            <li class="active"><a href="javascript:void(0);">Người dùng đánh gias</a></li>
                         </ul>
                         <div class="ps-tab active" id="tab-1">
                             <div class="table-responsive">
-                                <p *ngIf="!rates || rates.length === 0" style="text-decoration: underline;">This product has not received any reviews yet.</p>
+                                <p *ngIf="!rates || rates.length === 0" style="text-decoration: underline;">Sản phẩm này chưa có đánh giá nào.</p>
                                 <div class="row">
                                     <div class="col-10">
                                         <table class="table table-bordered ps-table ps-table--specification">
@@ -94,19 +94,19 @@
                                                     </td>
                                                     <td>
                                                         <h5>
-                                                            Fullname: <a>{{item.user.name}}</a><br>
+                                                            Tên: <a>{{item.user.name}}</a><br>
                                                         </h5>
                                                         <h5>
-                                                            Date: <span>{{item.rateDate|date:'dd-MM-yyyy'}}</span>
+                                                            Ngày: <span>{{item.rateDate|date:'dd-MM-yyyy'}}</span>
                                                         </h5>
                                                         <h5>
-                                                            Rating:
+                                                            Đánh giá:
                                                             <ngb-rating class="ml-2" [(rate)]="item.rating"
                                                                 title="{{item.rating}} sao" [starTemplate]="t" [readonly]="true" [max]="5">
                                                             </ngb-rating>
                                                         </h5>
                                                         <h5>
-                                                            Message:
+                                                            Nhận xét:
                                                             <p style="color: #09c; font-size: 16px;">
                                                                 {{item.comment}}
                                                             </p>
@@ -138,13 +138,13 @@
             </div>
             <div class="ps-page__right">
                 <aside class="widget widget_product widget_features">
-                    <p><i class="icon-network"></i> FreeShip</p>
-                    <p><i class="icon-3d-rotate"></i> Free returns within 7 days if the conditions are met.</p>
-                    <p><i class="icon-receipt"></i> The supplier has issued an invoice</p>
-                    <p><i class="icon-credit-card"></i> Payment can be made either in person or online</p>
+                    <p><i class="icon-network"></i> Miễn phí vận chuyển</p>
+                    <p><i class="icon-3d-rotate"></i> Trả hàng miễn phí trong vòng 7 ngày nếu đáp ứng đủ điều kiện.</p>
+                    <p><i class="icon-receipt"></i> Hóa đơn đầy đủ</p>
+                    <p><i class="icon-credit-card"></i> Thanh toán dễ dàng</p>
                 </aside>
                 <aside class="widget widget_sell-on-site">
-                    <p><i class="icon-store"></i> Shop here in ElectricShop?<a [routerLink]="['/sign-form']"> Register now !</a></p>
+                    <p><i class="icon-store"></i> Mua sắm tại ElectricShop?<a [routerLink]="['/sign-form']"> Đăng ký ngay !</a></p>
                 </aside>
                 <aside class="widget widget_ads"><a href="#"><img src="img/ads/product-ads.png" alt=""></a></aside>
             </div>
@@ -153,7 +153,7 @@
         <div class="row" *ngIf="!isLoading">
             <div class="ps-section--default">
                 <div class="ps-section__header" >
-                    <h3>Recommended Products</h3>
+                    <h3>Sản phẩm đề xuất</h3>
                 </div>
                 <div class="ps-section__content">
                     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
@@ -180,7 +180,7 @@
                                             <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
                                                     title="{{getAvgRate(item.productId)}} sao">
                                             </ngb-rating>
-                                            ({{countRate}} Rating)
+                                            ({{countRate}} Đánh giá)
                                         </div>
                                         <p class="ps-product__price sale">
                                             <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
@@ -193,7 +193,7 @@
                                             <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
                                                     title="{{getAvgRate(item.productId)}} sao">
                                             </ngb-rating>
-                                            ({{countRate}} Rating)
+                                            ({{countRate}} Đánh giá)
                                         </div>
                                         <p class="ps-product__price sale">
                                             <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
@@ -247,7 +247,7 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Compare Product</h4>
+          <h4 class="modal-title">So sánh sản phẩm</h4>
           <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body">
@@ -262,17 +262,17 @@
                     <ngb-rating [rate]="getAvgRate(product.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
                       [title]="getAvgRate(product.productId) + ' sao'">
                     </ngb-rating>
-                    ({{ countRate }} Rating)
+                    ({{ countRate }} Đánh giá)
                   </div>
                   <p class="card-text">Price:
                     <del *ngIf="product.discount != 0" class="text-muted">{{ product.price | currency:'VND' }}</del>
                     {{ product.price * (1 - product.discount / 100) | currency:'VND' }}
                   </p>
                   <p class="card-text">
-                    <small class="text-muted">Category: <strong>{{ product.category.categoryName }}</strong></small>
+                    <small class="text-muted">Danh mục: <strong>{{ product.category.categoryName }}</strong></small>
                   </p>
                   <p class="card-text">
-                    <small class="text-muted">Sold: {{ product.sold }}</small>
+                    <small class="text-muted">Đã bán: {{ product.sold }}</small>
                   </p>
                 </div>
               </div>
@@ -287,17 +287,17 @@
                     <ngb-rating [rate]="getAvgRate(ProductCompare.productId)" [starTemplate]="t" [readonly]="true"
                       [max]="5" [title]="getAvgRate(ProductCompare.productId) + ' sao'">
                     </ngb-rating>
-                    ({{ countRate }} Rating)
+                    ({{ countRate }} Đánh giá)
                   </div>
-                  <p class="card-text">Price:
+                  <p class="card-text">Giá:
                     <del *ngIf="ProductCompare.discount != 0" class="text-muted">{{ ProductCompare.price | currency:'VND' }}</del>
                     {{ ProductCompare.price * (1 - ProductCompare.discount / 100) | currency:'VND' }}
                   </p>
                   <p class="card-text">
-                    <small class="text-muted">Category: <strong>{{ ProductCompare.category.categoryName }}</strong></small>
+                    <small class="text-muted">Danh mục: <strong>{{ ProductCompare.category.categoryName }}</strong></small>
                   </p>
                   <p class="card-text">
-                    <small class="text-muted">Sold: {{ ProductCompare.sold }}</small>
+                    <small class="text-muted">Đã bán: {{ ProductCompare.sold }}</small>
                   </p>
                 </div>
               </div>
@@ -308,13 +308,13 @@
             <div class="col-12">
               <div class="ps-section--default">
                 <div class="ps-section__header">
-                  <h5 class="text-center">Choose Products to Compare</h5>
+                  <h5 class="text-center">Chọn sản phẩm để so sánh</h5>
                 </div>
                 <div class="ps-section__content">
                   <form (submit)="FindProduct()" class="ps-form--quick-search">
-                    <input [(ngModel)]="searchQuery" name="searchQuery" type="text" placeholder="Search by product name..."
+                    <input [(ngModel)]="searchQuery" name="searchQuery" type="text" placeholder="Tìm sản phẩm..."
                       class="form-control">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn btn-primary">Tìm</button>
                   </form>
   
                   <div class="ps-shopping-product mt-4">
@@ -336,7 +336,7 @@
                                 <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true"
                                   [max]="5" [title]="getAvgRate(item.productId) + ' sao'">
                                 </ngb-rating>
-                                ({{ countRate }} Rating)
+                                ({{ countRate }} Đánh giá)
                               </div>
                               <p class="ps-product__price sale">
                                 <del *ngIf="item.discount != 0">{{ item.price | currency:'VND' }}</del>
@@ -362,7 +362,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Đóng</button>
         </div>
       </div>
     </div>

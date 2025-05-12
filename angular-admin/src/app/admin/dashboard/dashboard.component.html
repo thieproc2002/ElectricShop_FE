@@ -2,7 +2,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Home</h1>
+        <h1 class="h3 mb-0 text-gray-800">Trang chủ</h1>
     </div>
 
     <!-- Content Row -->
@@ -15,7 +15,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Revenue (monthly)</div>
+                                Doanh thu (tháng)</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{getRevenueMonthNow() | currency: 'VND'}}</div>
                         </div>
                         <div class="col-auto">
@@ -33,7 +33,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Revenue (yearly)</div>
+                                Doanh thu (năm)</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{getRevenueYearNow() | currency:'VND'}}</div>
                         </div>
                         <div class="col-auto">
@@ -50,7 +50,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Customers
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Khách hàng
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
@@ -73,7 +73,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Orders Needing Processing</div>
+                                Đơn hàng cần xử lý</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{orderHandle}}</div>
                         </div>
                         <div class="col-auto">
@@ -86,9 +86,9 @@
     </div>
     <div class="row mt-4">
         <div class="col-2">
-            <h2 style="font-size: 18px;">Annual Revenue Statistics</h2>
+            <h2 style="font-size: 18px;">Thống kê doanh số hàng năm</h2>
             <ul *ngFor="let item of countYears | orderBy : 'item' : true">
-                <li><span  title='Xem doanh thu của năm {{item}}' style="cursor: pointer; color: rgb(37, 111, 177);" (click)="setYear(item)">Year {{item}}</span>: <span style="font-weight: 500;">{{getRevenueYear(item)|currency:'VND'}}</span></li>
+                <li><span  title='Xem doanh thu của năm {{item}}' style="cursor: pointer; color: rgb(37, 111, 177);" (click)="setYear(item)">Năm {{item}}</span>: <span style="font-weight: 500;">{{getRevenueYear(item)|currency:'VND'}}</span></li>
             </ul>
         </div>
         <div class="col-10">

@@ -1,17 +1,17 @@
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Order Details</h4>
-        <h4 class="float-right">Total Amount: {{order.amount|currency:'VND'}}</h4>
+        <h4 class="modal-title">Chi tiết đơn hàng</h4>
+        <h4 class="float-right">Tổng tiền: {{order.amount|currency:'VND'}}</h4>
     </div>
     <div class="modal-body">
         <table class="table">
             <thead>
                 <tr style="background-color: #fcb800; color: white;">
                     <th class="text-center">#</th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th class="text-center">Quantity</th>
-                    <th class="text-center" *ngIf="order.status==2">Rating</th>
+                    <th>Sản phẩm</th>
+                    <th>Giá</th>
+                    <th class="text-center">Số lượng</th>
+                    <th class="text-center" *ngIf="order.status==2">Đánh giá</th>
                 </tr>
             </thead>
             <tbody>

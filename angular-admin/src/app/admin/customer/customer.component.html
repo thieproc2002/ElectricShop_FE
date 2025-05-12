@@ -2,14 +2,14 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Customer List</h1>
+        <h1 class="h3 mb-0 text-gray-800">Danh sách khách hàng</h1>
     </div>
 
     <!-- Content Row -->
     <div class="row">
         <div class="col-12">
             <mat-form-field>
-                <mat-label>Searching..</mat-label>
+                <mat-label>Tìm kiếm...</mat-label>
                 <input matInput type="text" (keyup)="search($event)" />
             </mat-form-field>
             <button mat-raised-button color="primary" class="ml-3" style="float: right;" (click)="exporter.exportTable('csv', {fileName:'Customer List'})">Export Excel</button>
@@ -27,7 +27,7 @@
                     <td mat-cell *matCellDef="let row">{{row.userId}}</td>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Full Name</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Tên</th>
                     <td mat-cell *matCellDef="let row"  (click)="ShowOrderHistory(content, row)">{{row.name}}</td>
                 </ng-container>
                 <ng-container matColumnDef="email">
@@ -35,27 +35,27 @@
                     <td mat-cell *matCellDef="let row">{{row.email}}</td>
                 </ng-container>
                 <ng-container matColumnDef="address">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Address</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Địa chỉ</th>
                     <td mat-cell *matCellDef="let row">{{row.address}}</td>
                 </ng-container>
                 <ng-container matColumnDef="phone">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Phone</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Số điện thoại</th>
                     <td mat-cell *matCellDef="let row">{{row.phone}}</td>
                 </ng-container>
                 <ng-container matColumnDef="gender">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 7%;">Gender</th>
-                    <td mat-cell *matCellDef="let row">{{row.gender?'Male':'Female'}}</td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 7%;">Giới tính</th>
+                    <td mat-cell *matCellDef="let row">{{row.gender?'nam':'nữ'}}</td>
                 </ng-container>
                 <ng-container matColumnDef="registerDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Registration Date</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Ngày tạo</th>
                     <td mat-cell *matCellDef="let row">{{row.registerDate|date:'dd-MM-yyy'}}</td>
                 </ng-container>
                 <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Status</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Trạng thái</th>
                     <td mat-cell *matCellDef="let row">{{row.status ? 'Active' : 'Inactive'}}</td>
                 </ng-container>
                 <ng-container matColumnDef="view">
-                    <th mat-header-cell *matHeaderCellDef style="width: 5%; padding: 10px;">View</th>
+                    <th mat-header-cell *matHeaderCellDef style="width: 5%; padding: 10px;">Xem</th>
 
                     <td mat-cell *matCellDef="let row"  style="width: 5%; padding: 10px;" >
                         <app-edit-customer [id]='row.userId' (editFinish)="finish()"></app-edit-customer>
@@ -79,7 +79,7 @@
 <!-- Modal container with ng-template -->
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" *ngIf="selectedCustomer">Order History for {{ selectedCustomer.name }}</h4>
+        <h4 class="modal-title" *ngIf="selectedCustomer">Lịch sử mua hàng của {{ selectedCustomer.name }}</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
@@ -88,11 +88,11 @@
                 <thead>
                     <tr>
                         <th>OrderID</th>
-                        <th>Order Date</th>
-                        <th>Grand Total</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Status</th>
+                        <th>Ngày đặt</th>
+                        <th>Tổng</th>
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>Trạng thái</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,13 +102,13 @@
                         <td>{{ order.amount | currency:'VND' }}</td>
                         <td>{{ order.address }}</td>
                         <td>{{ order.phone }}</td>
-                        <td style="width: 17%;">{{order.status==0?'Pending confirmation':order.status==4?'Payment completed':(order.status==1?'Confirmed':(order.status==2)?'Delivered':'Cancelled')}}</td>
+                        <td style="width: 17%;">{{order.status==0?'Chờ xác nhận':order.status==4?'Đã thanh toán':(order.status==1?'Đã nhận':(order.status==2)?'Đã giao':'Đã hủy')}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Đóng</button>
     </div>
 </ng-template>

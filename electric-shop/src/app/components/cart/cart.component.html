@@ -2,16 +2,16 @@
     <div class="ps-breadcrumb">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a [routerLink]="['/home']">HomePage</a></li>
-                <li><a [routerLink]="['/all-product']">Store</a></li>
-                <li>Shopping Cart</li>
+                <li><a [routerLink]="['/home']">Trang chủ</a></li>
+                <li><a [routerLink]="['/all-product']">Cửa hàng</a></li>
+                <li>Giỏ hàng</li>
             </ul>
         </div>
     </div>
     <div class="ps-section--shopping ps-shopping-cart">
         <div class="container">
             <div class="ps-section__header">
-                <h1>Shopping Cart</h1>
+                <h1>Giỏ hàng</h1>
             </div>
             <div class="ps-section__content">
                 <div class="table-responsive" *ngIf="cartDetails && cartDetails.length > 0">
@@ -19,11 +19,11 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total Amount</th>
-                                <th>Action</th>
+                                <th>Sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng</th>
+                                <th>Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,8 +37,8 @@
                                         </div>
                                         <div class="ps-product__content">
                                             <a [routerLink]="['/product-detail/'+item.product.productId]">{{item.product.name}}</a>
-                                            <p>Category:<strong> {{item.product.category.categoryName}}</strong></p>
-                                            <p *ngIf="item.product.quantity === 0" style="color: red;"><strong>Out of stock</strong></p>
+                                            <p>Danh mục:<strong> {{item.product.category.categoryName}}</strong></p>
+                                            <p *ngIf="item.product.quantity === 0" style="color: red;"><strong>Hết hàng</strong></p>
                                         </div>
                                     </div>
                                 </td>
@@ -65,13 +65,13 @@
                 </div>
                 <div class="row mt-5 mb-5" *ngIf="cartDetails && cartDetails.length === 0">
                     <div class="col-8 offset-2 text-center">
-                        <h2 style="color: #fcb800;">Empty Cart</h2>
-                        <h2 style="color: #fcb800;;">Please add a few items to your cart.</h2>
+                        <h2 style="color: #fcb800;">Giỏ hàng trống</h2>
+                        <h2 style="color: #fcb800;;">Vui lòng thêm sản phẩm vào giỏ hàng.</h2>
                     </div>
                 </div>
                 <div class="ps-section__cart-actions">
                     <a class="ps-btn" [routerLink]="['/all-product']">
-                    <i class="icon-arrow-left"></i> Back to Store</a>
+                    <i class="icon-arrow-left"></i> Cửa hàng</a>
                 </div>
             </div>
 

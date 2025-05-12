@@ -20,8 +20,10 @@ export class OrderComponent implements OnInit {
   orders!: Order[];
   orderLength!: number;
   columns: string[] = ['id', 'user', 'address', 'phone', 'amount', 'orderDate', 'status', 'view'];
-
-  
+searchOrderId: string = '';
+searchName: string = '';
+searchPhone: string = '';
+searchOrderDate: string = '';
   webSocket!: WebSocket;
   chatMessages: ChatMessage[] = [];
 
@@ -38,6 +40,7 @@ export class OrderComponent implements OnInit {
     this.openWebSocket();
     this.pageService.setPageActive('order');
     this.getAllOrder();
+    
   }
 
   ngOnDestroy(): void {
@@ -56,18 +59,29 @@ export class OrderComponent implements OnInit {
     })
   }
 
-  search(event: any) {
-    const fValue = (event.target as HTMLInputElement).value;
+  search() {
     this.orderService.get().subscribe(data => {
-      this.orders = data as Order[];
-      this.orders = this.orders.filter(o => o.user.name.toLowerCase().includes(fValue.toLowerCase()) || o.ordersId===Number(fValue) || o.address.toLowerCase().includes(fValue.toLowerCase()) || o.phone.includes(fValue.toLowerCase()));
-      this.listData = new MatTableDataSource(this.orders);
-      this.orderLength = this.orders.length;
-      this.listData.sort = this.sort;
-      this.listData.paginator = this.paginator;
-    })
-    
-  }
+        this.orders = data as Order[];
+        
+        // Lọc theo từng trường tìm kiếm
+        this.orders = this.orders.filter(order => {
+            const matchesOrderId = this.searchOrderId === '' || order.ordersId === Number(this.searchOrderId);
+            const matchesName = this.searchName === '' || order.user.name.toLowerCase().includes(this.searchName.toLowerCase());
+            const matchesPhone = this.searchPhone === '' || order.phone.includes(this.searchPhone);
+            
+            const orderDateString = new Date(order.orderDate).toISOString().slice(0, 10); // Chuyển về yyyy-MM-dd
+            const matchesOrderDate = this.searchOrderDate === '' || orderDateString === this.searchOrderDate;
+
+            return matchesOrderId && matchesName && matchesPhone && matchesOrderDate;
+        });
+
+        // Cập nhật bảng
+        this.listData = new MatTableDataSource(this.orders);
+        this.orderLength = this.orders.length;
+        this.listData.sort = this.sort;
+        this.listData.paginator = this.paginator;
+    });
+}
 
   finish() {
     this.ngOnInit();
