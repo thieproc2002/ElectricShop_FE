@@ -80,16 +80,16 @@
                     <div class="col-md-12 col-sm-12 col-12 ">
                         <div class="ps-block--shopping-total">
                             <div class="ps-block__header">
-                                <h4 class="title">Checkout</h4>
+                                <h4 class="title">Thanh toán</h4>
                             </div>
                             <div class="ps-block__header">
-                                <p>Total Amount <span> {{amountReal | currency:'VND'}}</span></p>
-                                <p>Total Savings <span> {{discount | currency:'VND'}}</span></p>
+                                <p>Tổng giá gốc <span> {{amountReal | currency:'VND'}}</span></p>
+                                <p>Giảm giá <span> {{discount | currency:'VND'}}</span></p>
                             </div>
                             <div class="ps-block__content">
-                                <h3>Grand Total <span> {{amount | currency:'VND'}}</span></h3>
+                                <h3>Tổng cộng <span> {{amount | currency:'VND'}}</span></h3>
                             </div>
-                        </div><a class="ps-btn ps-btn--fullwidth" [routerLink]="['/checkout']">Checkout</a>
+                        </div><a class="ps-btn ps-btn--fullwidth" [routerLink]="['/checkout']">Thanh toán</a>
                     </div>
                 </div>
             </div>

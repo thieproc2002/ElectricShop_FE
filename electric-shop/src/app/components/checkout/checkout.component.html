@@ -43,8 +43,8 @@
                                 <!-- Province Selection -->
                                 <div class="form-group">
                                     <label>Tỉnh/Thành phố<sup>*</sup></label>
-                                    <select style="font-size: 14px;" id="province" class="form-control" formControlName="province" (change)="onProvinceChange($event)">
-                                        <option value="">Chọn Tỉnh/Thành phố</option>
+                                    <select style="font-size: 14px;" id="province" class="form-control form-select" formControlName="province" (change)="onProvinceChange($event)">
+                                        <option value="0">Chọn Tỉnh/Thành phố</option>
                                         <option *ngFor="let province of provinces" [value]="province.code">{{ province.name }}</option>
                                     </select>
                                 </div>
@@ -52,8 +52,8 @@
                                 <!-- District Selection -->
                                 <div class="form-group">
                                     <label>Quận/Huyện<sup>*</sup></label>
-                                    <select id="district" class="form-control" formControlName="district" (change)="onDistrictChange($event)">
-                                        <option value="">Chọn Quận/Huyện</option>
+                                    <select id="district" class="form-control form-select" formControlName="district" (change)="onDistrictChange($event)">
+                                        <option value="0">Chọn Quận/Huyện</option>
                                         <option *ngFor="let district of districts" [value]="district.code">{{ district.name }}</option>
                                     </select>
                                 </div>
@@ -61,8 +61,8 @@
                                 <!-- Ward Selection -->
                                 <div class="form-group">
                                     <label>Phường/Xã<sup>*</sup></label>
-                                    <select id="ward" class="form-control" formControlName="ward">
-                                        <option value="">Chọn Phường/Xã</option>
+                                    <select id="ward" class="form-control form-select" formControlName="ward">
+                                        <option value="0">Chọn Phường/Xã</option>
                                         <option *ngFor="let ward of wards" [value]="ward.code">{{ ward.name }}</option>
                                     </select>
                                 </div>

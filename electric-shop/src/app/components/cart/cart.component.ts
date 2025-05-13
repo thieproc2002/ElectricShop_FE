@@ -67,7 +67,7 @@ export class CartComponent implements OnInit {
       this.cartService.getOneDetail(id).subscribe(data => {
         this.cartDetail = data as CartDetail;
         if(quantity> this.cartDetail.product.quantity){
-          this.toastr.info('Quantity is not valid, maximum allowed is ' + this.cartDetail.product.quantity , 'System!');
+          this.toastr.info('Số lượng không đủ, Sản phẩm này chỉ còn ' + this.cartDetail.product.quantity , 'System!');
           const idToFind = this.cartDetail.cartDetailId; // Assuming this.cartDetail has an 'id' property
           const item = this.cartDetails.find(item => item.cartDetailId === idToFind);
 
@@ -92,7 +92,7 @@ export class CartComponent implements OnInit {
 
   delete(id: number) {
     Swal.fire({
-      title: 'Remove product from cart?',
+      title: 'Bỏ sản phẩm ra khỏi giỏ hàng?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

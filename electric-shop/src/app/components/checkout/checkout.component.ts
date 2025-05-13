@@ -141,13 +141,13 @@ loadProvinces(): void {
   if (this.postForm.valid) {
     if (1==1) { // Kiểm tra xem các thuộc tính đã được gán giá trị chưa
       Swal.fire({
-        title: 'Do you want to place this order?',
+        title: 'Bạn có chắc muốn đặt hàng?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        cancelButtonText: 'No',
-        confirmButtonText: 'Yes'
+        cancelButtonText: 'Không',
+        confirmButtonText: 'Có'
       }).then((result) => {
         if (result.isConfirmed) { // Kiểm tra nếu người dùng đã bấm nút "Yes"
           let email = this.sessionService.getUser();
@@ -162,13 +162,13 @@ loadProvinces(): void {
                 let order: Order = data as Order;
                 this.sendMessage(order.ordersId);
                 Swal.fire(
-                  'Success!',
-                  'Congratulations, your order was placed successfully.',
+                  'Đặt hàng thành công!',
+                  'Chúc mừng, bạn đã đặt hàng thành công.',
                   'success'
                 );
                 this.router.navigate(['/cart']);
               }, error => {
-                this.toastr.error(`Your cart has Product is out of stock!`);
+                this.toastr.error(`Trong giỏ hàng của bạn có sản phẩm hết hàng xin kiểm tra!`);
               });
             }, error => {
               this.toastr.error('Error!', 'System!');
@@ -189,7 +189,7 @@ loadProvinces(): void {
       console.error('One or more of ward, district, or province is undefined.');
     }
   } else {
-    this.toastr.error('Please enter all required information', 'System!');
+    this.toastr.error('Vui lòng điền đầy đủ thông tin', 'System!');
   }
 }
 checkOutpay() {
@@ -208,22 +208,22 @@ checkOutpay() {
                 this.orderId = order.ordersId;
                 this.sendMessage(order.ordersId);
                 Swal.fire(
-                  'Success!',
-                  'Congratulations, your order was placed successfully.',
+                  'Đã thanh toán!',
+                  'Chúc mừng, bạn đã thanh toán thành công đơn hàng.',
                   'success'
                 );
                 this.router.navigate(['/cart']);
               }, error => {
-                this.toastr.error(`Your cart has Product is out of stock!`);
+                this.toastr.error(`Trong giỏ hàng của bạn có sản phẩm hết hàng xin kiểm tra!`);
               });
             }, error => {
-              this.toastr.error('Error!', 'System!');
+              this.toastr.error('Cập nhật thông tin giao hàng thất bại', 'System!');
             });
           }, error => {
-            this.toastr.error('Error!', 'System!');
+            this.toastr.error('Lấy thông tin giỏ hàng thất bại!', 'System!');
           });
   } else {
-    this.toastr.error('Please enter all required information', 'System!');
+    this.toastr.error('Vui lòng điền đầy đủ thông tin', 'System!');
   }
 }
 createFullAddress(): string {
