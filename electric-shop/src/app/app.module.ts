@@ -31,7 +31,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AuthGuard } from './guard/auth.guard';
 import { OrderModule } from 'ngx-order-pipe';
 import { NgxPayPalModule } from 'ngx-paypal';
-
+import { ProvinceService } from './services/province.service';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -95,7 +95,7 @@ const routes: Routes = [
       // newestOnTop: false,
     }),
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,ProvinceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

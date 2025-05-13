@@ -1,7 +1,6 @@
 import { Ward } from "./Ward";
 
-export class District {
+export interface District {
     'code': number;
     'name': string;
-    'wards': Ward[];
 }

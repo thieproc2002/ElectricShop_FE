@@ -1,4 +1,4 @@
-export class Ward {
+export interface Ward {
     'code': number;
     'name': string;
 }

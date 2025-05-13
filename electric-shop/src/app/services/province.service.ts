@@ -1,43 +1,25 @@
-import { HttpClient } from '@angular/common/http';
+// src/app/services/province.service.ts
 import { Injectable } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Province, District, Ward } from '../common/Location';
 @Injectable({
   providedIn: 'root'
 })
 export class ProvinceService {
+  private apiUrl = 'https://provinces.open-api.vn/api';
 
-  provinces = 'https://provinces.open-api.vn/api/p/'
-  districts = 'https://provinces.open-api.vn/api/d/';
-  wards = 'https://provinces.open-api.vn/api/w/';
+  constructor(private http: HttpClient) {}
 
-  province = 'https://provinces.open-api.vn/api/p/'
-  district = 'https://provinces.open-api.vn/api/d/';
-  ward = 'https://provinces.open-api.vn/api/w/';
-
-  constructor(private http: HttpClient) { }
-
-  getAllProvinces() {
-    return this.http.get(this.provinces);
+  getProvinces(): Observable<any[]> {
+    return this.http.get<Province[]>(`${this.apiUrl}/p`);
   }
 
-  getDistricts(code:number) {
-    return this.http.get(this.districts+'/'+code+'?depth=2');
+  getDistricts(provinceCode: number): Observable<{ districts: District[] }> {
+    return this.http.get<{ districts: District[] }>(`${this.apiUrl}/p/${provinceCode}?depth=2`);
   }
 
-  getWards(code:number) {
-    return this.http.get(this.wards+'/'+code+'?depth=2');
-  }
-
-  getProvince(id: number) {
-    return this.http.get(this.province+id);
-  }
-
-  getDistrict(id: number) {
-    return this.http.get(this.district+id);
-  }
-
-  getWard(id: number) {
-    console.log("this.ward ", this.ward)
-    return this.http.get(this.ward+id);
+  getWards(districtCode: number): Observable<{ wards: Ward[] }> {
+    return this.http.get<{ wards: Ward[] }>(`${this.apiUrl}/d/${districtCode}?depth=2`);
   }
 }

@@ -36,9 +36,10 @@ export class CheckoutComponent implements OnInit {
 
   postForm: FormGroup;
   orderId!: number;
-  provinces!: Province[];
-  districts!: District[];
-  wards!: Ward[];
+  provinces: any[] = [];
+  districts: any[] = [];
+  wards: any[] = [];
+
 
   province!: Province;
   district!: District;
@@ -56,7 +57,7 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private sessionService: SessionService,
     private orderService: OrderService,
-    private location: ProvinceService,
+    private provinceService: ProvinceService,
     private webSocketService: WebSocketService,
     private notificationService: NotificationService) {
     this.postForm = new FormGroup({
@@ -82,18 +83,40 @@ export class CheckoutComponent implements OnInit {
     this.amountPaypal = 0;
     this.amountReal = 0;
     this.getAllItem();
-    this.getProvinces();
+    this.loadProvinces();
+  }
+loadProvinces(): void {
+    this.provinceService.getProvinces().subscribe(data => {
+      this.provinces = data;
+    });
   }
 
+  onProvinceChange(event: any): void {
+    const provinceCode = event.target.value;
+    this.provinceService.getDistricts(provinceCode).subscribe(data => {
+      this.districts = data.districts; 
+      this.wards = [];
+      this.postForm.controls['district'].setValue('');
+      this.postForm.controls['ward'].setValue('');
+    });
+  }
+
+  onDistrictChange(event: any): void {
+    const districtCode = event.target.value;
+    this.provinceService.getWards(districtCode).subscribe(data => {
+      this.wards = data.wards;
+      this.postForm.controls['ward'].setValue('');
+    });
+  }
   getAllItem() {
     let email = this.sessionService.getUser();
     this.cartService.getCart(email).subscribe(data => {
       this.cart = data as Cart;
       this.postForm = new FormGroup({
         'phone': new FormControl(this.cart.phone, [Validators.required, Validators.pattern('(0)[0-9]{9}')]),
-        'province': new FormControl(0/*, [Validators.required, Validators.min(1)]*/),
-        'district': new FormControl(0/*, [Validators.required, Validators.min(1)]*/),
-        'ward': new FormControl(0/*, [Validators.required, Validators.min(1)]*/),
+        'province': new FormControl(0, [Validators.required, Validators.min(1)]),
+        'district': new FormControl(0, [Validators.required, Validators.min(1)]),
+        'ward': new FormControl(0, [Validators.required, Validators.min(1)]),
         'number': new FormControl('', Validators.required),
       })
       this.cartService.getAllDetail(this.cart.cartId).subscribe(data => {
@@ -131,7 +154,7 @@ export class CheckoutComponent implements OnInit {
           this.cartService.getCart(email).subscribe(data => {
             this.cart = data as Cart;
 
-            this.cart.address = this.postForm.value.number /*+ ', ' + this.getWardByCode(this.wardCode) + ', ' + this.getDistristByCode(this.districtCode) + ', ' + this.getProvineByCode(this.provinceCode)*/;
+            this.cart.address = this.createFullAddress();
             this.cart.phone = this.postForm.value.phone;
             this.cartService.updateCart(email, this.cart).subscribe(data => {
               this.cart = data as Cart;
@@ -176,7 +199,7 @@ checkOutpay() {
           this.cartService.getCart(email).subscribe(data => {
             this.cart = data as Cart;
 
-            this.cart.address = this.postForm.value.number;
+            this.cart.address = this.createFullAddress();
             this.cart.phone = this.postForm.value.phone;
             this.cartService.updateCart(email, this.cart).subscribe(data => {
               this.cart = data as Cart;
@@ -203,7 +226,21 @@ checkOutpay() {
     this.toastr.error('Please enter all required information', 'System!');
   }
 }
+createFullAddress(): string {
+    const number = this.postForm.value.number || '';
+    const wardCode = this.postForm.value.ward;
+    const districtCode = this.postForm.value.district;
+    const provinceCode = this.postForm.value.province;
 
+    // Kiểm tra nếu các danh sách đã được tải
+    const wardName = this.wards.find(obj => obj.code == wardCode)?.name || '';
+    const districtName = this.districts.find(obj => obj.code == districtCode)?.name || '';
+    const provinceName = this.provinces.find(obj => obj.code == provinceCode)?.name || '';
+    
+    // Tạo địa chỉ đầy đủ
+    return `${number}, ${wardName}, ${districtName}, ${provinceName}`.replace(/(^, |, $)/g, '');
+   
+}
   sendMessage(id:number) {
     let chatMessage = new ChatMessage(this.cart.user.name, ' has placed an order.');
     this.notificationService.post(new Notification(0, this.cart.user.name + ' has placed an order. ('+id+')')).subscribe(data => {
@@ -211,93 +248,20 @@ checkOutpay() {
     })
   }
 
-  getProvinces() {
-    this.location.getAllProvinces().subscribe(data => {
-      const results = data as any;
-      const provincesRs = results['results'] as any[];
-    
-      this.provinces = provincesRs.map(province => ({
-        code: province.province_id,
-        name: province.province_name
-      })) as Province[]
-    })
-  }
-
-  getDistricts() {
-    this.location.getDistricts(this.provinceCode).subscribe(data => {
-      
-      this.districts = ((data as any)['results'] as any[]).map(district => ({
-        code: district.district_id,
-        name: district.district_name
-      })) as District[]
-    })
-  }
-
-  getWards() {
-    this.location.getWards(this.districtCode).subscribe(data => {
-      console.log("ward", data)
-      this.wards = ((data as any)['results'] as any[]).map(ward => ({
-        code: ward.ward_id,
-        name:ward. ward_name
-      })) as Ward[]
-    })
-  }
-
-  getWard() {
-    
-    if (!this.wardCode) {
-      console.error('Ward code is not set.');
-      console.log("2")
-      return;
-    }
   
-    this.location.getWard(this.wardCode).subscribe(
-      (data: any) => {
-        this.ward = data as Ward;
-      },
-      (error) => {
-        console.error('Error fetching ward:', error);
-        // Handle the error, e.g., display an error message to the user
-      }
-    );
-    
-  }
-
-  getWardByCode(code:any) {
-
-    for (let obj of this.wards) {
-        // Nếu mã của đối tượng trùng với mã được truyền vào
-        if (obj.code === code) {
-            // Trả về đối tượng hiện tại
-            return obj.name;
-        }
-    }
-    // Nếu không tìm thấy đối tượng nào có mã trùng khớp, trả về null hoặc một giá trị khác tùy thuộc vào yêu cầu của bạn
-    return null;
+getWardByCode(code: any): string | null {
+    const ward = this.wards.find(obj => obj.code === code);
+    return ward ? ward.name : null;
 }
-getProvineByCode(code:any) {
 
-  for (let obj of this.provinces) {
-      // Nếu mã của đối tượng trùng với mã được truyền vào
-      if (obj.code === code) {
-          // Trả về đối tượng hiện tại
-          return obj.name;
-      }
-  }
-  // Nếu không tìm thấy đối tượng nào có mã trùng khớp, trả về null hoặc một giá trị khác tùy thuộc vào yêu cầu của bạn
-  return null;
+getProvineByCode(code: any): string | null {
+    const province = this.provinces.find(obj => obj.code === code);
+    return province ? province.name : null;
 }
-getDistristByCode(code:any) {
 
-  for (let obj of this.districts) {
-      // Nếu mã của đối tượng trùng với mã được truyền vào
-      if (obj.code === code) {
-          // Trả về đối tượng hiện tại
-          return obj.name;
-      }
-  }
-  // Nếu không tìm thấy đối tượng nào có mã trùng khớp, trả về null hoặc một giá trị khác tùy thuộc vào yêu cầu của bạn
-  return null;
+getDistristByCode(code: any): string | null {
+    const district = this.districts.find(obj => obj.code === code);
+    return district ? district.name : null;
 }
   // paidOrder(id: number) {
   //     if(id===-1) {
@@ -317,21 +281,7 @@ getDistristByCode(code:any) {
   //     });
   
   //   }
-  setProvinceCode(code: any) {
-    this.provinceCode = code.value;
-    this.getDistricts();
-  }
-
-  setDistrictCode(code: any) {
-    this.districtCode = code.value;
-    this.getWards();
-  }
-
-  setWardCode(code: any) {
-    console.log("selected province", code)
-    this.wardCode = code.value;
-    this.getWard();
-  }
+ 
 
   private checkOutPaypal(): void {
 
