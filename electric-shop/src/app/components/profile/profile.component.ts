@@ -159,11 +159,11 @@ export class ProfileComponent implements OnInit {
   proceedChangePass() {
     console.log(this._regform.valid);
     if (!this._regform.valid) {
-      this.toastr.warning('Invalid Password!', 'System!');
+      this.toastr.warning('Tối thiểu 6 ký tự', 'System!');
       return;
     }
     if (this._regform.value.password !== this._regform.value.confirmpassword) {
-      this.toastr.warning('The confirm password does not match!', 'System!');
+      this.toastr.warning('Xác nhận mật khẩu không khớp', 'System!');
       return;
     }
     // Kiểm tra mật khẩu cũ
@@ -171,14 +171,14 @@ export class ProfileComponent implements OnInit {
     this.customerService.verifyOldPassword(this.customerUpdate.userId, oldPassword).subscribe(
       isPasswordCorrect => {
         if (!isPasswordCorrect) {
-          this.toastr.warning('Old password is incorrect!', 'System!');
+          this.toastr.warning('Mật khẩu cũ không chính xác', 'System!');
           return;
         }
         // Mật khẩu cũ đúng, tiếp tục cập nhật mật khẩu mới
         this.customerUpdate.password = this._regform.value.password;
         this.customerService.update(this.customerUpdate.userId, this.customerUpdate).subscribe(
           data => {
-            this.toastr.success('Success!', 'System!');
+            this.toastr.success('Thành công!', 'System!');
             this.updateUI(data);
             this.modalService.dismissAll();
           },
@@ -194,7 +194,7 @@ export class ProfileComponent implements OnInit {
 }
 
   selectFile!: File;
-  url: string = 'https://res.cloudinary.com/veggie-shop/image/upload/v1633795994/users/mnoryxp056ohm0b4gcrj.png';
+  url: string = 'https://i.pinimg.com/736x/b7/91/44/b79144e03dc4996ce319ff59118caf65.jpg';
   image: string = this.url;
   onFileSelect(event: any) {
     this.selectFile = event.target.files[0];

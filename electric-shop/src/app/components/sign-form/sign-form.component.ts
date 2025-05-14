@@ -66,11 +66,11 @@ export class SignFormComponent implements OnInit {
 
   sign_up() {
     if (this.registerForm.invalid) {
-      this.toastr.error('Please enter all required information!', 'System!');
+      this.toastr.error('Hãy nhập đầy đủ thông tin!', 'System!');
       return;
     }
     if (this.registerForm.hasError('passwordMismatch')) {
-      this.toastr.error('Passwords do not match!', 'System!');
+      this.toastr.error('Mật khẩu không chính xác!', 'System!');
       return;
     }
     this.otpcode = localStorage.getItem("otp");
@@ -82,7 +82,7 @@ export class SignFormComponent implements OnInit {
       this.authService.register(this.register).subscribe(data => {
         Swal.fire({
           icon: 'success',
-          title: 'Signup Success!',
+          title: 'Đăng ký thành công!',
           showConfirmButton: false,
           timer: 1500
         })
@@ -95,7 +95,7 @@ export class SignFormComponent implements OnInit {
       });
     }
     else {
-      this.toastr.error('Incorrect OTP code!', 'System!');
+      this.toastr.error('OTP không chính xác!', 'System!');
     }
 
   }
@@ -121,11 +121,11 @@ export class SignFormComponent implements OnInit {
 
             Swal.fire({
               icon: 'error',
-              title: 'Login Failed!',
+              title: 'Sai thông tin đăng nhập!',
               showConfirmButton: false,
               timer: 1500
             })
-            this.toastr.error('Invalid Login Information', 'System!');
+            this.toastr.error('Sai thông tin đăng nhập', 'System!');
 
             this.isLoginFailed = true;
             this.sessionService.signOut();
@@ -133,7 +133,7 @@ export class SignFormComponent implements OnInit {
           } else {
             Swal.fire({
               icon: 'success',
-              title: 'Login Success!',
+              title: 'Đăng nhập thành công!',
               showConfirmButton: false,
               timer: 1500
             })
@@ -166,12 +166,12 @@ export class SignFormComponent implements OnInit {
       window.localStorage.removeItem("otp");
       window.localStorage.setItem("otp", JSON.stringify(data));
 
-      this.toastr.success('OTP has been sent to your registered email !', 'System!');
+      this.toastr.success('OTP đã được gửi đến email của bạn !', 'System!');
     }, error => {
       if (error.status == 404) {
-        this.toastr.error('This email is already registered !', 'System!');
+        this.toastr.error('Email này đã được đăng ký !', 'System!');
       } else {
-        this.toastr.warning('Please enter a valid email format !', 'System!');
+        this.toastr.warning('Hãy nhập email !', 'System!');
       }
     });
 
@@ -188,7 +188,7 @@ export class SignFormComponent implements OnInit {
     this.show = !this.show;
   }
   sendError() {
-    this.toastr.warning('Please enter a valid email format !', 'System!');
+    this.toastr.warning('Hãy nhập đúng email', 'System!');
   }
 
 }

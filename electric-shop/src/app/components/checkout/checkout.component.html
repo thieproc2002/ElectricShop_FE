@@ -2,27 +2,27 @@
     <div class="ps-breadcrumb">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a [routerLink]="['/home']">HomePage</a></li>
-                <li><a [routerLink]="['/all-product']">Store</a></li>
-                <li>Checkout</li>
+                <li><a [routerLink]="['/home']">Trang chủ</a></li>
+                <li><a [routerLink]="['/all-product']">Cửa hàng</a></li>
+                <li>Thanh toán</li>
             </ul>
         </div>
     </div>
     <div class="ps-checkout ps-section--shopping">
         <div class="container">
             <div class="ps-section__header">
-                <h1>Checkout</h1>
+                <h1>Thanh toán</h1>
             </div>
             <div class="ps-section__content">
                 <form class="ps-form--checkout" [formGroup]="postForm">
                     <div class="row">
                         <div class="col-xl-7 col-lg-8 col-md-12 col-sm-12">
                             <div class="ps-form__billing-info">
-                                <h3 class="ps-form__heading">Shipping Information</h3>
+                                <h3 class="ps-form__heading">Thông tin giao hàng</h3>
 
                                 <!-- Fullname -->
                                 <div class="form-group">
-                                    <label>Fullname<sup>*</sup></label>
+                                    <label>Họ tên<sup>*</sup></label>
                                     <div class="form-group__content">
                                         <input class="form-control" type="text" *ngIf="cart && cart.user"
                                             [value]="cart.user.name" readonly placeholder="Fullname">
@@ -31,12 +31,12 @@
 
                                 <!-- Phone Number -->
                                 <div class="form-group">
-                                    <label>Phone Number<sup>*</sup></label>
+                                    <label>Số điện thoại<sup>*</sup></label>
                                     <div class="form-group__content">
                                         <input class="form-control" type="text"
                                             [ngClass]="{'is-invalid':postForm.get('phone')?.touched && postForm.get('phone')?.invalid}"
                                             placeholder="Phone number" formControlName="phone">
-                                        <small class="invalid-feedback">Phone Invalid</small>
+                                        <small class="invalid-feedback">Số điện thoại chưa chính xác</small>
                                     </div>
                                 </div>
 
@@ -69,22 +69,22 @@
 
                                 <!-- House Number -->
                                 <div class="form-group">
-                                    <label>Address<sup>*</sup></label>
+                                    <label>Số nhà, tên đường<sup>*</sup></label>
                                     <div class="form-group__content">
                                         <input class="form-control" type="text" formControlName="number"
                                             [ngClass]="{'is-invalid':postForm.get('number')?.touched && postForm.get('number')?.invalid}"
                                             placeholder="House Number">
-                                        <small class="invalid-feedback">Please Input Your House Number</small>
+                                        <small class="invalid-feedback">Hãy nhập số nhà và tên đường của bạn</small>
                                     </div>
                                 </div>
 
                                 <!-- Order Notes -->
-                                <h3 class="mt-40">Supplementary Details</h3>
+                                <h3 class="mt-40">Thông tin thêm</h3>
                                 <div class="form-group">
-                                    <label>Order Notes</label>
+                                    <label>Lưu ý</label>
                                     <div class="form-group__content">
                                         <textarea class="form-control" rows="7"
-                                            placeholder="Add notes about your order"></textarea>
+                                            placeholder="Nhập lưu ý của bạn"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -93,14 +93,14 @@
                         <!-- Order Details -->
                         <div class="col-xl-5 col-lg-4 col-md-12 col-sm-12">
                             <div class="ps-form__total">
-                                <h3 class="ps-form__heading">Order Details</h3>
+                                <h3 class="ps-form__heading">Chi tiết đơn hàng</h3>
                                 <div class="content">
                                     <div class="ps-block--checkout-total">
                                         <div class="ps-block__header">
                                             <table class="table ps-block__header">
                                                 <tr>
-                                                    <td style="width: 294.65px;">Products</td>
-                                                    <td>Total Amount</td>
+                                                    <td style="width: 294.65px;">Sản phẩm</td>
+                                                    <td>Giá gốc</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -118,16 +118,16 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <h4 class="ps-block__title">Total Amount: <span>{{amountReal | currency:'VND'}}</span></h4>
-                                            <h4 class="ps-block__title">Total Savings: <span>{{discount | currency:'VND'}}</span></h4>
-                                            <h3>Grand Total: <span style="color: red;padding-left: 40px;">{{amount | currency:'VND'}}</span></h3>
+                                            <h4 class="ps-block__title">Tổng giá gốc: <span>{{amountReal | currency:'VND'}}</span></h4>
+                                            <h4 class="ps-block__title">Giảm giá: <span>{{discount | currency:'VND'}}</span></h4>
+                                            <h3>Thành tiền: <span style="color: red;padding-left: 40px;">{{amount | currency:'VND'}}</span></h3>
                                         </div>
                                     </div>
-                                    <p style="text-align: center;">Cash On Delivery</p>
+                                    <p style="text-align: center;">Thanh toán khi nhận hàng</p>
                                     <a class="ps-btn ps-btn--fullwidth" href="javascript:void(0);" (click)="checkOut()">Confirm checkout</a>
                                     <br>
-                                    <p style="text-align: center;">Or</p>
-                                    <p style="text-align: center;">Online payment through PayPal</p>
+                                    <p style="text-align: center;">Hoặc</p>
+                                    <p style="text-align: center;">Thanh toán trả trước với PayPal</p>
                                     <ngx-paypal [config]="payPalConfig"></ngx-paypal>
                                 </div>
                             </div>
