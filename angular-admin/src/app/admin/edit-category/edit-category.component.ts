@@ -49,13 +49,13 @@ export class EditCategoryComponent implements OnInit {
     if (this.postForm.valid) {
       this.categoryService.put(this.id, this.postForm.value).subscribe(data => {
         this.modalService.dismissAll();
-        this.toastr.success('Edit Success!', 'System!');
+        this.toastr.success('Cập nhật thành công!', 'System!');
         this.editFinish.emit('done');
       }, error => {
-        this.toastr.error('Edit Failed!', 'System!' + error);
+        this.toastr.error('Cập nhật thất bại!', 'System!' + error);
       })
     } else {
-      this.toastr.error('Edit Failed!', 'System!');
+      this.toastr.error('Dữ liệu không phù hợp!', 'System!');
     }
   }
 

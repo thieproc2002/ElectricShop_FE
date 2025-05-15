@@ -48,7 +48,7 @@ export class CategoryComponent implements OnInit {
 
   delete(id: number, name: string) {
     Swal.fire({
-      title: 'Delete ' + name + ' ?',
+      title: 'Xóa ' + name + ' ?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes',
@@ -57,9 +57,9 @@ export class CategoryComponent implements OnInit {
       if (result.isConfirmed) {
         this.categoryService.delete(id).subscribe(data => {
           this.ngOnInit();
-          this.toastr.success('Delete Success!', 'System!');
+          this.toastr.success('Xóa thành công!', 'System!');
         }, error => {
-          this.toastr.error('Delete Failed!', 'System!');
+          this.toastr.error('Không thể xóa!', 'System!');
         })
       }
     })

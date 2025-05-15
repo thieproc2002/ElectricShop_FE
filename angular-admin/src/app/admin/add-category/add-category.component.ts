@@ -36,11 +36,11 @@ export class AddCategoryComponent implements OnInit {
     if(this.postForm.valid) {
       this.categoryService.post(this.postForm.value).subscribe(data=>{
         this.modalService.dismissAll();
-        this.toastr.success('Success!', 'System!');
+        this.toastr.success('Thành công!', 'Hệ thống!');
         this.saveFinish.emit('done');
       })
     } else {
-      this.toastr.error('Failed!', 'System!');
+      this.toastr.error('Thất bại!', 'System!');
     }
     this.postForm = new FormGroup({
       'categoryId': new FormControl(0),

@@ -43,7 +43,7 @@ export class ProductComponent implements OnInit {
 
   delete(id: number, name: string) {
     Swal.fire({
-      title: 'Change status ' + name + ' ?',
+      title: 'Xóa sản phẩm ' + name + ' ?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes',
@@ -52,9 +52,9 @@ export class ProductComponent implements OnInit {
       if (result.isConfirmed) {
         this.productService.delete(id).subscribe(data=>{
           this.ngOnInit();
-          this.toastr.success('Change Success!', 'System!');
+          this.toastr.success('Thành công!', 'System!');
         },error=>{
-          this.toastr.error('Change Failed!', 'System!');
+          this.toastr.error('Thất bại!', 'System!');
         })
       }
     })

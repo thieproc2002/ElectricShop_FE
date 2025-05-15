@@ -19,7 +19,7 @@ export class AddCustomerComponent implements OnInit {
   saveFinish: EventEmitter<any> = new EventEmitter<any>();
 
   selectFile!: File;
-  url: string = 'https://res.cloudinary.com/veggie-shop/image/upload/v1633795994/users/mnoryxp056ohm0b4gcrj.png';
+  url: string = 'https://i.pinimg.com/736x/b7/91/44/b79144e03dc4996ce319ff59118caf65.jpg';
   image: string = this.url;
 
   postForm: FormGroup;
@@ -51,13 +51,13 @@ export class AddCustomerComponent implements OnInit {
         this.saveFinish.emit('done');
       }, error => {
         if (error.status === 404) {
-          this.toastr.error('Email exist! ', 'System!');
+          this.toastr.error('Email đã tồn tại! ', 'System!');
         } else {
-          this.toastr.error('Add failed!', 'System!');
+          this.toastr.error('Thêm thất bại!', 'System!');
         }
       })
     } else {
-      this.toastr.error('Add failed!', 'System!');
+      this.toastr.error('Thêm thất bại!', 'System!');
     }
     this.postForm = new FormGroup({
       'userId': new FormControl(0),

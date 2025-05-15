@@ -50,11 +50,11 @@ export class EditCustomerComponent implements OnInit {
       this.customer.image = this.image;
 
       this.customerService.update(this.id, this.customer).subscribe(data=>{
-        this.toastr.success('Update Success!', 'System!');
+        this.toastr.success('Cập nhật thành công!', 'System!');
         this.editFinish.emit('done');
       })
     } else {
-      this.toastr.error('Check Data Again! ', 'System!');
+      this.toastr.error('Kiểm tra lại dữ liệu nhập! ', 'System!');
     }
     this.modalService.dismissAll();
   }
@@ -76,7 +76,7 @@ export class EditCustomerComponent implements OnInit {
       })
       this.image = this.customer.image;
     }, error => {
-      this.toastr.error('Data Error!', 'System!');
+      this.toastr.error('Lỗi server!', 'System!');
     })
   }
 

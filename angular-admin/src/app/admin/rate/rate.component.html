@@ -21,18 +21,18 @@
                     <td mat-cell *matCellDef="let row, let i = index">{{i+1}}</td>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%;">Customer</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%;">Khách hàng</th>
                     <td mat-cell *matCellDef="let row">{{row.user.name}}</td>
                 </ng-container>
                 <ng-container matColumnDef="product">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Product</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Sản phẩm</th>
                     <td mat-cell *matCellDef="let row">
                         <img [src]="row.product.image" style="width: 60px;" [title]='row.product.name'
                             class="img-fluid">
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="rating">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Rating</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Đánh giá</th>
                     <td mat-cell *matCellDef="let row">
                         <ngb-rating [(rate)]="row.rating" [starTemplate]="t" [readonly]="true" [max]="5"
                             title="{{row.rating}} sao">
@@ -40,11 +40,11 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="comment">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 25%;">Comment</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 25%;">Nhận xét</th>
                     <td mat-cell *matCellDef="let row">{{row.comment}}</td>
                 </ng-container>
                 <ng-container matColumnDef="rateDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Time</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;">Ngày gửi</th>
                     <td mat-cell *matCellDef="let row">{{row.rateDate|date:'dd-MM-yyyy'}}</td>
                 </ng-container>
                 <ng-container matColumnDef="delete">

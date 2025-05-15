@@ -49,7 +49,7 @@ export class ContactComponent implements OnInit {
       },
       error => {
         console.log('Error: ' + error);
-        this.toastr.error('Failed to load contacts.');
+        this.toastr.error('Lấy dữ liệu thất bại.');
       }
     );
   }
@@ -61,7 +61,7 @@ export class ContactComponent implements OnInit {
       },
       error => {
         console.log('Error: ' + error);
-        this.toastr.error('Failed to load contact details.');
+        this.toastr.error('Lấy dữ liệu thất bại.');
       }
     );
   }
@@ -78,7 +78,7 @@ export class ContactComponent implements OnInit {
           console.log('Response from server:', response); // Log response from server
           
             console.log('Email sent successfully:', response);
-            this.toastr.success('Email sent successfully!');
+            this.toastr.success('Gửi email thành công!');
             this.selectedContact!.status = 2; // Update status
            
             this.listData.data = this.listData.data.map(contact =>
@@ -90,7 +90,7 @@ export class ContactComponent implements OnInit {
         },
         error => {
           this.updateContactStatusInList(this.selectedContact!.contactID, 2); // Update table data
-          this.toastr.success('Email sent successfully!');
+          this.toastr.success('Gửi email thành công!');
           
         }
       );

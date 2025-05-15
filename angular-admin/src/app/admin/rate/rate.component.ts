@@ -44,7 +44,7 @@ export class RateComponent implements OnInit {
 
   delete(id: number) {
     Swal.fire({
-      title: 'Delete ?',
+      title: 'Xóa ?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Yes',
@@ -53,7 +53,7 @@ export class RateComponent implements OnInit {
       if (result.isConfirmed) {
         this.rateService.delete(id).subscribe(data => {
           this.ngOnInit();
-          this.toastr.success('Success!', 'System!');
+          this.toastr.success('Đã xóa!', 'System!');
         }, error => {
           this.toastr.error('Failed!' + error.status, 'System!');
         })

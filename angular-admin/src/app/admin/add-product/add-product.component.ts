@@ -58,12 +58,12 @@ export class AddProductComponent implements OnInit {
       this.product.image = this.image;
 
       this.productService.save(this.product).subscribe(data => {
-        this.toastr.success('Add Success!', 'System!');
+        this.toastr.success('Thêm thành công!', 'System!');
         this.saveFinish.emit('done');
       })
 
     } else {
-      this.toastr.error('Add Failed!', 'System!');
+      this.toastr.error('Thêm thất bại!', 'System!');
     }
     this.postForm = new FormGroup({
       'productId': new FormControl(0),
@@ -85,7 +85,7 @@ export class AddProductComponent implements OnInit {
     this.categoryService.getAll().subscribe(data => {
       this.categories = data as Category[];
     }, error => {
-      this.toastr.error('Data Error!', 'System!');
+      this.toastr.error('Lỗi dữ liệu!', 'System!');
     })
   }
 

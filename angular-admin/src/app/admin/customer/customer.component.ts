@@ -63,10 +63,10 @@ export class CustomerComponent implements OnInit {
         // Nếu status = true, hiển thị cửa sổ xác nhận xóa
         if (status) {
           Swal.fire({
-            title: 'Do you want to ban the user ' + name + ' for 3 days?',
+            title: 'Bạn muốn khóa tài khoản ' + name + '?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Ban',
+            confirmButtonText: 'Yes',
             cancelButtonText: 'No'
           }).then((result) => {
             // Nếu người dùng xác nhận xóa
@@ -76,7 +76,7 @@ export class CustomerComponent implements OnInit {
                 () => {
                   // Nạp lại dữ liệu sau khi xóa thành công
                   this.getAll();
-                  this.toastr.success('Ban successfully!', 'System');
+                  this.toastr.success('Khóa thành công!', 'System');
                 },
                 (error) => {
                   // Xử lý lỗi khi xóa không thành công
@@ -88,10 +88,10 @@ export class CustomerComponent implements OnInit {
         } else {
           // Nếu status = false, hiển thị cửa sổ xác nhận hủy
           Swal.fire({
-            title: 'Do you want to cancel the ban for user ' + name + '?',
+            title: 'Bạn muốn gỡ khóa tài khoản ' + name + '?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Cancel Ban',
+            confirmButtonText: 'Yes',
             cancelButtonText: 'No'
           }).then((result) => {
             // Nếu người dùng xác nhận hủy
@@ -101,11 +101,11 @@ export class CustomerComponent implements OnInit {
                 () => {
                   // Nạp lại dữ liệu sau khi hủy thành công
                   this.getAll();
-                  this.toastr.success('Cancelled successfully!', 'System');
+                  this.toastr.success('Đã bỏ khóa!', 'System');
                 },
                 (error) => {
                   // Xử lý lỗi khi hủy không thành công
-                  this.toastr.error('Failed to cancel, an error occurred!', 'System');
+                  this.toastr.error('Gỡ thất bại, an error occurred!', 'System');
                 }
               );
             }
@@ -130,7 +130,7 @@ export class CustomerComponent implements OnInit {
         }
       });
     }, error => {
-      this.toastr.error('Error fetching orders!', 'System');
+      this.toastr.error('Lỗi lấy danh sách hóa đơn!', 'System');
     });
   }
 

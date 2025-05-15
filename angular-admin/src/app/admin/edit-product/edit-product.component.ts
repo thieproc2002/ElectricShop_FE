@@ -55,11 +55,11 @@ export class EditProductComponent implements OnInit {
       this.product.image = this.image;
       this.product.status = this.postForm.value.status;
       this.productService.update(this.product, this.id).subscribe(data=>{
-        this.toastr.success('Edit Success!', 'System!');
+        this.toastr.success('Cập nhật thành công!', 'System!');
         this.editFinish.emit('done');
       })
     } else {
-      this.toastr.error('Error, Check Information Again!', 'System!');
+      this.toastr.error('Lỗi thông tin nhập, vui lòng kiểm tra lại!', 'System!');
     }
     this.modalService.dismissAll();
   }

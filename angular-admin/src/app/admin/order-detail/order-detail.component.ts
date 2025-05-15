@@ -56,7 +56,7 @@ export class OrderDetailComponent implements OnInit {
 
   deliver() {
     Swal.fire({
-      title: 'Confirm order ?',
+      title: 'Xác nhận đơn hàng ?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Yes',
@@ -64,7 +64,7 @@ export class OrderDetailComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.orderService.deliver(this.orderId).subscribe(data => {
-          this.toastr.success('Confirm!', 'System!');
+          this.toastr.success('Xác nhận thành công!', 'System!');
           this.updateFinish.emit('done');
           this.modalService.dismissAll();
         }, error => {
@@ -76,7 +76,7 @@ export class OrderDetailComponent implements OnInit {
 
   cancel() {
     Swal.fire({
-      title: 'Cancel order ?',
+      title: 'Hủy đơn hàng ?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes',
@@ -84,7 +84,7 @@ export class OrderDetailComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.orderService.cancel(this.orderId).subscribe(data => {
-          this.toastr.success('Cancelled!', 'System!');
+          this.toastr.success('Đã hủy!', 'System!');
           this.updateFinish.emit('done');
           this.modalService.dismissAll();
         }, error => {
@@ -96,7 +96,7 @@ export class OrderDetailComponent implements OnInit {
 
   confirm() {
     Swal.fire({
-      title: 'Delivered Order?',
+      title: 'Xác nhận hoàn thành đơn hàng?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Yes',
@@ -104,7 +104,7 @@ export class OrderDetailComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.orderService.success(this.orderId).subscribe(data => {
-          this.toastr.success('Payment Received!', 'System!');
+          this.toastr.success('Đã hoàn thành đơn!', 'System!');
           this.updateFinish.emit('done');
           this.modalService.dismissAll();
         }, error => {
